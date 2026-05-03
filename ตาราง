@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ทำประกันOnline | FWD</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --o:#FF6200;--o2:#FF8534;--dark:#0F0F0F;--ch:#1E1E1E;
+  --bdr:rgba(255,255,255,0.08);--txt:#F0F0F0;--mut:rgba(255,255,255,0.45);
+  --wh:#FFFFFF;--grn:#22C55E;--red:#EF4444;
+  --gold:#D4A017;--glight:rgba(212,160,23,0.12);
+  --teal:#0D9488;--tlight:rgba(13,148,136,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);font-family:'Sarabun',sans-serif;color:var(--txt);min-height:100vh;overflow-x:hidden;}
+
+/* HEADER */
+.hdr{background:var(--ch);border-bottom:1px solid var(--bdr);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Prompt',sans-serif;font-weight:900;font-size:19px;color:var(--o);line-height:1;}
+.logo sub{display:block;font-size:8px;font-weight:400;letter-spacing:1.5px;color:var(--mut);margin-top:1px;}
+.hdr-r{font-size:10px;color:var(--mut);text-align:right;}
+
+/* TABS - 3 columns */
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--ch);border-bottom:1px solid var(--bdr);}
+.tab-btn{padding:12px 6px;font-family:'Prompt',sans-serif;font-weight:700;font-size:11px;border:none;background:transparent;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;text-align:center;line-height:1.4;}
+.tab-btn.t-ci{color:var(--o);border-bottom-color:var(--o);}
+.tab-btn.t-leg{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-btn.t-pc{color:var(--teal);border-bottom-color:var(--teal);}
+
+/* HERO */
+.hero{padding:22px 18px 18px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1A1A1A 0%,var(--dark) 100%);}
+.hero::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,98,0,0.13) 0%,transparent 65%);pointer-events:none;transition:background .4s;}
+.hero.m-leg::before{background:radial-gradient(circle,rgba(212,160,23,0.13) 0%,transparent 65%);}
+.hero.m-pc::before{background:radial-gradient(circle,rgba(13,148,136,0.13) 0%,transparent 65%);}
+.eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--o);margin-bottom:5px;transition:color .3s;}
+.hero.m-leg .eyebrow{color:var(--gold);}
+.hero.m-pc .eyebrow{color:var(--teal);}
+.htitle{font-family:'Prompt',sans-serif;font-weight:800;font-size:22px;color:var(--wh);line-height:1.2;margin-bottom:4px;}
+.htitle em{color:var(--o);font-style:normal;transition:color .3s;}
+.hero.m-leg .htitle em{color:var(--gold);}
+.hero.m-pc .htitle em{color:var(--teal);}
+.hdesc{font-size:12px;color:var(--mut);line-height:1.6;max-width:320px;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.chip{background:rgba(255,98,0,0.1);border:1px solid rgba(255,98,0,0.25);border-radius:20px;padding:3px 10px;font-size:10px;color:var(--o2);transition:all .3s;}
+.hero.m-leg .chip{background:var(--glight);border-color:rgba(212,160,23,0.25);color:var(--gold);}
+.hero.m-pc .chip{background:var(--tlight);border-color:rgba(13,148,136,0.25);color:var(--teal);}
+
+/* FORM */
+.form-sec{padding:18px;background:var(--ch);margin:12px;border-radius:16px;border:1px solid var(--bdr);}
+.ftitle{font-family:'Prompt',sans-serif;font-weight:700;font-size:14px;color:var(--wh);margin-bottom:14px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px;}
+.fg{display:flex;flex-direction:column;gap:4px;}
+.flabel{font-size:9px;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+.finput,.fselect{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:11px 13px;font-size:15px;font-family:'Sarabun',sans-serif;color:var(--wh);width:100%;transition:border-color .2s;-webkit-appearance:none;}
+.finput:focus,.fselect:focus{outline:none;border-color:var(--o);background:rgba(255,98,0,0.06);}
+.fselect option{background:#1E1E1E;color:var(--wh);}
+
+/* GENDER */
+.gen{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.gbtn{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--mut);cursor:pointer;transition:all .2s;text-align:center;}
+.gbtn.g-ci{background:rgba(255,98,0,0.12);border-color:var(--o);color:var(--o);font-weight:700;}
+.gbtn.g-leg{background:var(--glight);border-color:var(--gold);color:var(--gold);font-weight:700;}
+.gbtn.g-pc{background:var(--tlight);border-color:var(--teal);color:var(--teal);font-weight:700;}
+
+/* AMOUNT BTNS */
+.amts{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
+.abtn{background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px 10px;font-size:11px;font-family:'Sarabun',sans-serif;color:var(--mut);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.abtn.a-ci{background:rgba(255,98,0,0.12);border-color:var(--o);color:var(--o);font-weight:700;}
+.abtn.a-leg{background:var(--glight);border-color:var(--gold);color:var(--gold);font-weight:700;}
+.abtn.a-pc{background:var(--tlight);border-color:var(--teal);color:var(--teal);font-weight:700;}
+
+/* SEARCH BTN */
+.sbtn{width:100%;color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;margin-top:14px;transition:transform .15s;letter-spacing:.5px;}
+.sbtn:active{transform:scale(.97);}
+.sbtn.s-ci{background:var(--o);}
+.sbtn.s-leg{background:linear-gradient(135deg,var(--gold),#9A7015);}
+.sbtn.s-pc{background:linear-gradient(135deg,var(--teal),#065F56);}
+
+/* LOADING */
+.loading{display:none;text-align:center;padding:18px;color:var(--mut);font-size:13px;}
+.spinner{width:24px;height:24px;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px;}
+.sp-ci{border:2px solid rgba(255,98,0,.2);border-top-color:var(--o);}
+.sp-leg{border:2px solid rgba(212,160,23,.2);border-top-color:var(--gold);}
+.sp-pc{border:2px solid rgba(13,148,136,.2);border-top-color:var(--teal);}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* NO RESULT */
+.nores{display:none;padding:20px;text-align:center;background:var(--ch);border-radius:16px;border:1px solid var(--bdr);margin:0 12px 12px;}
+.nores-icon{font-size:28px;margin-bottom:7px;}
+.nores-txt{font-size:13px;color:var(--mut);line-height:1.6;}
+
+/* RESULT */
+.res-sec{margin:0 12px 12px;display:none;}
+.res-sec.show{display:block;}
+.res-card{background:var(--ch);border-radius:16px;border:1px solid var(--bdr);overflow:hidden;animation:slideUp .4s ease-out;}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.res-hdr{padding:16px 18px;position:relative;overflow:hidden;}
+.res-hdr::after{content:'';position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.rh-ci{background:linear-gradient(135deg,var(--o) 0%,#C94400 100%);}
+.rh-leg{background:linear-gradient(135deg,#C9952A 0%,#8B6914 100%);}
+.rh-pc{background:linear-gradient(135deg,#0D9488 0%,#065F56 100%);}
+.r-plan{font-family:'Prompt',sans-serif;font-weight:800;font-size:16px;color:white;line-height:1.2;margin-bottom:2px;position:relative;z-index:1;}
+.r-for{font-size:11px;color:rgba(255,255,255,.75);position:relative;z-index:1;}
+
+.pdisp{padding:16px 18px;border-bottom:1px solid var(--bdr);}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;}
+.plbl{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.pval{font-family:'Prompt',sans-serif;font-size:32px;font-weight:900;line-height:1;}
+.pval span{font-size:12px;font-weight:400;color:var(--mut);margin-left:2px;}
+.pval-ci{color:var(--o);}
+.pval-leg{color:var(--gold);}
+.pval-pc{color:var(--teal);}
+.pmo{font-size:11px;color:var(--mut);margin-top:2px;}
+.pr{text-align:right;}
+.psub{font-family:'Prompt',sans-serif;font-size:16px;font-weight:800;color:var(--wh);}
+
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr);border-bottom:1px solid var(--bdr);}
+.dcell{background:var(--ch);padding:11px 14px;}
+.dl{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.dv{font-family:'Prompt',sans-serif;font-size:13px;font-weight:700;color:var(--wh);}
+.dv-ci{color:var(--o);}
+.dv-leg{color:var(--gold);}
+.dv-pc{color:var(--teal);}
+
+.covs{padding:13px 18px;border-bottom:1px solid var(--bdr);}
+.covt{font-size:9px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.covl{display:flex;flex-direction:column;gap:6px;}
+.cov{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--txt);line-height:1.5;}
+.ck{width:15px;height:15px;background:rgba(34,197,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;margin-top:2px;color:var(--grn);}
+
+.cta{padding:13px 18px;display:flex;flex-direction:column;gap:8px;}
+.cbtn{width:100%;border-radius:10px;padding:13px;font-size:13px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;border:none;transition:transform .15s;letter-spacing:.5px;}
+.cbtn:active{transform:scale(.97);}
+.cb-ci{background:var(--o);color:white;}
+.cb-leg{background:linear-gradient(135deg,var(--gold),#9A7015);color:white;}
+.cb-pc{background:linear-gradient(135deg,var(--teal),#065F56);color:white;}
+.cb-sec{background:rgba(255,255,255,.06);color:var(--wh);border:1px solid var(--bdr)!important;}
+.cb-out-ci{background:transparent;color:var(--o);border:1.5px solid var(--o)!important;}
+.cb-out-leg{background:transparent;color:var(--gold);border:1.5px solid var(--gold)!important;}
+.cb-out-pc{background:transparent;color:var(--teal);border:1.5px solid var(--teal)!important;}
+
+/* QR */
+.qrsec{margin:0 12px 12px;background:var(--ch);border-radius:16px;border:1px solid var(--bdr);padding:20px 18px;text-align:center;}
+.qrt{font-family:'Prompt',sans-serif;font-weight:700;font-size:14px;color:var(--wh);margin-bottom:4px;}
+.qrs{font-size:11px;color:var(--mut);margin-bottom:16px;}
+.qrw{width:140px;height:140px;background:white;border-radius:12px;margin:0 auto 13px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;}
+.qrw img{width:100%;height:100%;object-fit:contain;}
+.lbtn{display:inline-flex;align-items:center;gap:6px;background:#06C755;color:white;border:none;border-radius:10px;padding:11px 20px;font-size:13px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+
+/* MODAL */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:flex-end;backdrop-filter:blur(4px);}
+.mov.show{display:flex;}
+.modal{background:#1A1A1A;border-radius:20px 20px 0 0;width:100%;max-height:90vh;overflow-y:auto;padding:0 0 40px;animation:slideModal .35s cubic-bezier(.32,.72,0,1);}
+@keyframes slideModal{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.mhandle{width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:12px auto 0;}
+.mhead{padding:16px 18px 12px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;}
+.mtitle{font-family:'Prompt',sans-serif;font-weight:700;font-size:16px;color:var(--wh);}
+.mclose{background:rgba(255,255,255,.08);border:none;width:28px;height:28px;border-radius:50%;font-size:15px;color:var(--mut);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mbody{padding:16px 18px;}
+.mg{margin-bottom:12px;}
+.ml{font-size:10px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:6px;display:block;}
+.mi,.ms,.mta{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 13px;font-size:14px;font-family:'Sarabun',sans-serif;color:var(--wh);transition:border-color .2s;}
+.mta{min-height:70px;resize:none;}
+.mi:focus,.ms:focus,.mta:focus{outline:none;border-color:var(--o);}
+.ms option{background:#1A1A1A;}
+.msub{width:100%;background:var(--o);color:white;border:none;border-radius:12px;padding:14px;font-size:14px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;margin-top:5px;}
+.ss{text-align:center;padding:34px 18px;display:none;}
+.si{width:56px;height:56px;background:rgba(34,197,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px;}
+.st{font-family:'Prompt',sans-serif;font-weight:700;font-size:18px;color:var(--wh);margin-bottom:6px;}
+.sd{font-size:12px;color:var(--mut);line-height:1.6;}
+
+.errtxt{font-size:10px;color:var(--red);margin-top:3px;display:none;}
+input.err,select.err{border-color:var(--red)!important;}
+
+.footer{padding:20px 18px 40px;text-align:center;border-top:1px solid var(--bdr);margin-top:6px;}
+.flogo{font-family:'Prompt',sans-serif;font-weight:900;font-size:16px;color:var(--o);margin-bottom:4px;}
+.ftxt{font-size:10px;color:var(--mut);line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div><div class="logo">FWD<sub>ทำประกันOnline</sub></div></div>
+  <div class="hdr-r">Agent Code<br><strong style="color:var(--o)">162165</strong></div>
+</div>
+
+<!-- 3 TABS -->
+<div class="tabs">
+  <button class="tab-btn t-ci" id="tabCI" onclick="sw('ci')">💊 CI<br>โรคร้ายแรง</button>
+  <button class="tab-btn" id="tabLeg" onclick="sw('leg')">🏆 มรดก<br>Dragon</button>
+  <button class="tab-btn" id="tabPC" onclick="sw('pc')">🏥 พรีเชียส<br>แคร์</button>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="heroEl">
+  <div class="eyebrow">เช็คเบี้ยประกัน</div>
+  <div class="htitle" id="htitle">โรคร้ายแรง<br><em>CI Re-Claim Re-Care</em></div>
+  <div class="hdesc" id="hdesc">กรอกข้อมูลเพื่อดูเบี้ยประกันที่เหมาะกับคุณ ภายใน 3 วินาที</div>
+  <div class="chips" id="hchips">
+    <div class="chip">✅ เบี้ยจริง</div>
+    <div class="chip">🔒 ปลอดภัย</div>
+    <div class="chip">⚡ ทันที</div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-sec">
+  <div class="ftitle" id="ftitle">🔍 ค้นหาเบี้ยประกัน CI</div>
+  <div class="frow">
+    <div class="fg">
+      <label class="flabel">อายุ (ปี)</label>
+      <input type="number" id="inAge" class="finput" placeholder="เช่น 35" min="1" max="75">
+      <div class="errtxt" id="ageErr">กรุณากรอกอายุให้ถูกต้อง</div>
+    </div>
+    <div class="fg">
+      <label class="flabel">เพศ</label>
+      <div class="gen">
+        <button class="gbtn g-ci" id="btnM" onclick="setG('male')">👨 ชาย</button>
+        <button class="gbtn" id="btnF" onclick="setG('female')">👩 หญิง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CI -->
+  <div id="secCI" class="fg" style="margin-bottom:12px">
+    <label class="flabel">ทุน CI Re-Claim</label>
+    <div class="amts" id="ciAmts">
+      <button class="abtn" onclick="pick('ci',500000,this)">500K</button>
+      <button class="abtn" onclick="pick('ci',1000000,this)">1M</button>
+      <button class="abtn a-ci" onclick="pick('ci',3000000,this)">3M</button>
+      <button class="abtn" onclick="pick('ci',5000000,this)">5M</button>
+      <button class="abtn" onclick="pick('ci',6000000,this)">6M</button>
+      <button class="abtn" onclick="pick('ci',7000000,this)">7M</button>
+      <button class="abtn" onclick="pick('ci',8000000,this)">8M</button>
+      <button class="abtn" onclick="pick('ci',9000000,this)">9M</button>
+      <button class="abtn" onclick="pick('ci',10000000,this)">10M</button>
+    </div>
+  </div>
+
+  <!-- LEGACY -->
+  <div id="secLeg" class="fg" style="margin-bottom:12px;display:none">
+    <label class="flabel">ทุนประกันมรดก</label>
+    <div class="amts" id="legAmts">
+      <button class="abtn" onclick="pick('leg',1000000,this)">1 ล้าน</button>
+      <button class="abtn a-leg" onclick="pick('leg',2000000,this)">2 ล้าน</button>
+      <button class="abtn" onclick="pick('leg',3000000,this)">3 ล้าน</button>
+      <button class="abtn" onclick="pick('leg',5000000,this)">5 ล้าน</button>
+    </div>
+  </div>
+
+  <!-- PRECIOUS CARE -->
+  <div id="secPC" class="fg" style="margin-bottom:12px;display:none">
+    <label class="flabel">วงเงินเหมาจ่าย/ปี</label>
+    <div class="amts" id="pcAmts">
+      <button class="abtn" onclick="pick('pc',1000000,this)">1 ล้าน</button>
+      <button class="abtn a-pc" onclick="pick('pc',3000000,this)">3 ล้าน</button>
+      <button class="abtn" onclick="pick('pc',6000000,this)">6 ล้าน</button>
+      <button class="abtn" onclick="pick('pc',12000000,this)">12 ล้าน</button>
+    </div>
+  </div>
+
+  <button class="sbtn s-ci" id="sbtn" onclick="doSearch()">🔍 ดูเบี้ยประกัน</button>
+</div>
+
+<div class="loading" id="loadEl"><div class="spinner sp-ci" id="spinEl"></div>กำลังค้นหาข้อมูล...</div>
+<div class="nores" id="noresEl"><div class="nores-icon">😔</div><div class="nores-txt">ไม่พบข้อมูล<br>กรุณาติดต่อเอเจนต์โดยตรงครับ</div></div>
+
+<!-- RESULT -->
+<div class="res-sec" id="resSec">
+  <div class="res-card">
+    <div class="res-hdr rh-ci" id="rHdr">
+      <div class="r-plan" id="rPlan">-</div>
+      <div class="r-for" id="rFor">-</div>
+    </div>
+    <div class="pdisp">
+      <div class="prow">
+        <div>
+          <div class="plbl">เบี้ยประกันรายปี</div>
+          <div class="pval pval-ci" id="rPrem">-<span>บาท/ปี</span></div>
+          <div class="pmo" id="rMo">-</div>
+        </div>
+        <div class="pr">
+          <div class="plbl" id="rSumLbl">ทุน CI</div>
+          <div class="psub" id="rSum">-</div>
+        </div>
+      </div>
+    </div>
+    <div class="dgrid">
+      <div class="dcell"><div class="dl">ทุนประกันชีวิต</div><div class="dv" id="rLife">-</div></div>
+      <div class="dcell"><div class="dl" id="rExLbl">เคลมสูงสุด</div><div class="dv dv-ci" id="rEx">-</div></div>
+      <div class="dcell"><div class="dl">คุ้มครองถึงอายุ</div><div class="dv" id="rCov">-</div></div>
+      <div class="dcell"><div class="dl">รับประกัน</div><div class="dv" id="rAcc">-</div></div>
+    </div>
+    <div class="covs"><div class="covt">ความคุ้มครอง</div><div class="covl" id="covList"></div></div>
+    <div class="cta">
+      <button class="cbtn cb-ci" id="ctaLine" onclick="window.open('https://lin.ee/Wb0k43i','_blank')">💬 สนใจ — ส่งข้อความหาเอเจนต์</button>
+      <button class="cbtn cb-out-ci" id="ctaAppt" onclick="openAppt()">📅 นัดหมายปรึกษาฟรี</button>
+      <button class="cbtn cb-sec" onclick="showQR()">📱 ดู QR Code ติดต่อ</button>
+    </div>
+  </div>
+</div>
+
+<!-- QR -->
+<div class="qrsec" id="qrEl" style="display:none">
+  <div class="qrt">📱 ติดต่อผ่าน Line</div>
+  <div class="qrs">สแกน QR หรือกดปุ่มด้านล่าง</div>
+  <div class="qrw"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://lin.ee/Wb0k43i&color=0F0F0F&bgcolor=FFFFFF" alt="QR"></div>
+  <a href="https://lin.ee/Wb0k43i" target="_blank" class="lbtn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    เพิ่มเพื่อนใน Line
+  </a>
+</div>
+
+<div class="footer">
+  <div class="flogo">FWD ทำประกันOnline</div>
+  <div class="ftxt">ทนาดิต · Agent Code 162165<br>เบี้ยที่แสดงเป็นเบี้ยรายปี อ้างอิงจาก FWD Insurance</div>
+</div>
+
+<!-- MODAL -->
+<div class="mov" id="apptMov" onclick="closeApptOut(event)">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mhead">
+      <div class="mtitle">📅 นัดหมายปรึกษาฟรี</div>
+      <button class="mclose" onclick="closeAppt()">✕</button>
+    </div>
+    <div class="mbody" id="mbody">
+      <div class="mg"><label class="ml">ชื่อ - นามสกุล</label><input type="text" class="mi" id="aName" placeholder="กรอกชื่อของคุณ"></div>
+      <div class="mg"><label class="ml">เบอร์โทรศัพท์</label><input type="tel" class="mi" id="aPhone" placeholder="08X-XXX-XXXX"></div>
+      <div class="mg"><label class="ml">Line ID (ถ้ามี)</label><input type="text" class="mi" id="aLine" placeholder="@your_line_id"></div>
+      <div class="mg"><label class="ml">วันที่นัด</label><input type="date" class="mi" id="aDate"></div>
+      <div class="mg">
+        <label class="ml">ช่วงเวลา</label>
+        <select class="ms" id="aTime">
+          <option value="">-- เลือกช่วงเวลา --</option>
+          <option>09:00 - 11:00</option><option>11:00 - 13:00</option>
+          <option>13:00 - 15:00</option><option>15:00 - 17:00</option>
+          <option>17:00 - 19:00</option><option>19:00 - 21:00</option>
+        </select>
+      </div>
+      <div class="mg"><label class="ml">ข้อความเพิ่มเติม</label><textarea class="mta" id="aNote" placeholder="เช่น สนใจแผน CI 3M ชาย 35 ปี..."></textarea></div>
+      <button class="msub" onclick="submitAppt()">✅ ส่งคำขอนัดหมาย</button>
+    </div>
+    <div class="ss" id="ssEl">
+      <div class="si">✅</div>
+      <div class="st">ส่งคำขอเรียบร้อย!</div>
+      <div class="sd">เอเจนต์จะติดต่อกลับภายใน 24 ชั่วโมงครับ</div>
+      <br>
+      <a href="https://lin.ee/Wb0k43i" target="_blank" class="lbtn" style="margin-top:8px;display:inline-flex">💬 เพิ่มเพื่อน Line</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════
+// DATA
+// ═══════════════════════════
+
+// CI data
+const CI={
+  500000:{1:{m:3488,f:3102},2:{m:3194,f:2989},3:{m:3166,f:2997},4:{m:3075,f:2836},5:{m:2859,f:2611},6:{m:2619,f:2361},7:{m:2455,f:2222},8:{m:2393,f:2244},9:{m:2448,f:2338},10:{m:2524,f:2422},11:{m:2601,f:2461},12:{m:2783,f:2485},13:{m:2991,f:2517},14:{m:3095,f:2553},15:{m:3210,f:2576},16:{m:3265,f:2599},17:{m:3321,f:2623},18:{m:3379,f:2650},19:{m:3452,f:2692},20:{m:3486,f:2720},21:{m:3632,f:2756},22:{m:3721,f:2797},23:{m:3802,f:2900},24:{m:3929,f:3041},25:{m:3989,f:3143},26:{m:4072,f:3217},27:{m:4146,f:3413},28:{m:4229,f:3636},29:{m:4360,f:3772},30:{m:4465,f:3860},31:{m:4611,f:3954},32:{m:4883,f:4258},33:{m:5021,f:4397},34:{m:5140,f:4706},35:{m:5228,f:4784},36:{m:5365,f:4879},37:{m:5563,f:5007},38:{m:6031,f:5356},39:{m:6550,f:5702},40:{m:7129,f:6039},41:{m:8175,f:6336},42:{m:8898,f:6762},43:{m:9740,f:7250},44:{m:10703,f:7808},45:{m:11746,f:8427},46:{m:12872,f:9219},47:{m:14024,f:9936},48:{m:15201,f:10687},49:{m:16425,f:11457},50:{m:17773,f:12176},51:{m:19296,f:14459},52:{m:21019,f:15433},53:{m:23017,f:16944},54:{m:25322,f:17934},55:{m:27899,f:19005},56:{m:30794,f:20360},57:{m:33991,f:22110},58:{m:37369,f:23856},59:{m:41270,f:26011},60:{m:45970,f:28841},61:{m:51181,f:31923},62:{m:56825,f:34358},63:{m:61106,f:36773},64:{m:68478,f:39311},65:{m:76116,f:44315},66:{m:79105,f:46386},67:{m:85894,f:51361},68:{m:91265,f:56987},69:{m:99405,f:63274},70:{m:109100,f:67404}},
+  1000000:{1:{m:5963,f:5297},2:{m:5359,f:5059},3:{m:5286,f:5062},4:{m:5085,f:4726},5:{m:4634,f:4261},6:{m:4134,f:3746},7:{m:3785,f:3452},8:{m:3638,f:3479},9:{m:3723,f:3648},10:{m:3849,f:3797},11:{m:3976,f:3856},12:{m:4313,f:3885},13:{m:4701,f:3927},14:{m:4880,f:3978},15:{m:5080,f:4001},16:{m:5160,f:4024},17:{m:5241,f:4048},18:{m:5324,f:4075},19:{m:5437,f:4132},20:{m:5471,f:4160},21:{m:5727,f:4201},22:{m:5866,f:4252},23:{m:5987,f:4425},24:{m:6199,f:4671},25:{m:6274,f:4838},26:{m:6392,f:4947},27:{m:6491,f:5298},28:{m:6604,f:5701},29:{m:6810,f:5927},30:{m:6960,f:6055},31:{m:7191,f:6194},32:{m:7668,f:6748},33:{m:7876,f:6972},34:{m:8040,f:7531},35:{m:8138,f:7624},36:{m:8330,f:7749},37:{m:8638,f:7937},38:{m:9481,f:8561},39:{m:10420,f:9177},40:{m:11474,f:9769},41:{m:13455,f:10276},42:{m:14783,f:11037},43:{m:16340,f:11915},44:{m:18133,f:12928},45:{m:20076,f:14057},46:{m:22177,f:15524},47:{m:24319,f:16836},48:{m:26501,f:18207},49:{m:28765,f:19607},50:{m:31263,f:20896},51:{m:34096,f:25304},52:{m:37314,f:27083},53:{m:41062,f:29924},54:{m:45407,f:31709},55:{m:50274,f:33640},56:{m:55754,f:36120},57:{m:61811,f:39370},58:{m:68204,f:42591},59:{m:75610,f:46606},60:{m:84580,f:51946},61:{m:94536,f:57763},62:{m:105320,f:62258},63:{m:113336,f:66678},64:{m:127488,f:71306},65:{m:142121,f:80825},66:{m:147420,f:84441},67:{m:160254,f:93811},68:{m:170195,f:104432},69:{m:185615,f:116319},70:{m:204085,f:123834}},
+  2000000:{1:{m:10913,f:9687},2:{m:9689,f:9199},3:{m:9526,f:9192},4:{m:9105,f:8506},5:{m:8184,f:7561},6:{m:7164,f:6516},7:{m:6445,f:5912},8:{m:6128,f:5949},9:{m:6273,f:6268},10:{m:6499,f:6547},11:{m:6726,f:6646},12:{m:7373,f:6685},13:{m:8121,f:6747},14:{m:8450,f:6828},15:{m:8820,f:6851},16:{m:8950,f:6874},17:{m:9081,f:6898},18:{m:9214,f:6925},19:{m:9407,f:7012},20:{m:9441,f:7040},21:{m:9917,f:7091},22:{m:10156,f:7162},23:{m:10357,f:7475},24:{m:10739,f:7931},25:{m:10844,f:8228},26:{m:11032,f:8407},27:{m:11181,f:9068},28:{m:11354,f:9831},29:{m:11710,f:10237},30:{m:11950,f:10445},31:{m:12351,f:10674},32:{m:13238,f:11728},33:{m:13586,f:12122},34:{m:13840,f:13181},35:{m:13958,f:13304},36:{m:14260,f:13489},37:{m:14788,f:13797},38:{m:16381,f:14971},39:{m:18160,f:16127},40:{m:20164,f:17229},41:{m:24015,f:18156},42:{m:26553,f:19587},43:{m:29540,f:21245},44:{m:32993,f:23168},45:{m:36736,f:25317},46:{m:40787,f:28134},47:{m:44909,f:30636},48:{m:49101,f:33247},49:{m:53445,f:35907},50:{m:58243,f:38336},51:{m:63696,f:46994},52:{m:69904,f:50383},53:{m:77152,f:55884},54:{m:85577,f:59259},55:{m:95024,f:62910},56:{m:105674,f:67640},57:{m:117451,f:73890},58:{m:129874,f:80061},59:{m:144290,f:87796},60:{m:161800,f:98156},61:{m:181246,f:109443},62:{m:202310,f:118058},63:{m:217796,f:126488},64:{m:245508,f:135296},65:{m:274131,f:153845},66:{m:284050,f:160551},67:{m:308974,f:178711},68:{m:328055,f:199322},69:{m:358035,f:222409},70:{m:394055,f:236694}},
+  3000000:{1:{m:15863,f:14077},2:{m:14019,f:13339},3:{m:13766,f:13322},4:{m:13125,f:12286},5:{m:11734,f:10861},6:{m:10194,f:9286},7:{m:9105,f:8372},8:{m:8618,f:8419},9:{m:8823,f:8888},10:{m:9149,f:9297},11:{m:9476,f:9436},12:{m:10433,f:9485},13:{m:11541,f:9567},14:{m:12020,f:9678},15:{m:12560,f:9701},16:{m:12740,f:9724},17:{m:12921,f:9748},18:{m:13104,f:9775},19:{m:13377,f:9892},20:{m:13411,f:9920},21:{m:14107,f:9981},22:{m:14446,f:10072},23:{m:14727,f:10525},24:{m:15279,f:11191},25:{m:15414,f:11618},26:{m:15672,f:11867},27:{m:15871,f:12838},28:{m:16104,f:13961},29:{m:16610,f:14547},30:{m:16940,f:14835},31:{m:17511,f:15154},32:{m:18808,f:16708},33:{m:19296,f:17272},34:{m:19640,f:18831},35:{m:19778,f:18984},36:{m:20190,f:19229},37:{m:20938,f:19657},38:{m:23281,f:21381},39:{m:25900,f:23077},40:{m:28854,f:24689},41:{m:34575,f:26036},42:{m:38323,f:28137},43:{m:42740,f:30575},44:{m:47853,f:33408},45:{m:53396,f:36577},46:{m:59397,f:40744},47:{m:65499,f:44436},48:{m:71701,f:48287},49:{m:78125,f:52207},50:{m:85223,f:55776},51:{m:93296,f:68684},52:{m:102494,f:73683},53:{m:113242,f:81844},54:{m:125747,f:86809},55:{m:139774,f:92180},56:{m:155594,f:99160},57:{m:173091,f:108410},58:{m:191544,f:117531},59:{m:212970,f:128986},60:{m:239020,f:144366},61:{m:267956,f:161123},62:{m:299300,f:173858},63:{m:322256,f:186298},64:{m:363528,f:199286},65:{m:406141,f:226865},66:{m:420680,f:236661},67:{m:457694,f:263611},68:{m:485915,f:294212},69:{m:530455,f:328499},70:{m:584025,f:349554}},
+  5000000:{20:{m:21351,f:15680},21:{m:22487,f:15761},22:{m:23026,f:15892},23:{m:23467,f:16625},24:{m:24359,f:17711},25:{m:24554,f:18398},26:{m:24952,f:18787},27:{m:25251,f:20378},28:{m:25604,f:22221},29:{m:26410,f:23167},30:{m:26920,f:23615},31:{m:27831,f:24114},32:{m:29948,f:26668},33:{m:30716,f:27572},34:{m:31240,f:30131},35:{m:31418,f:30344},36:{m:32050,f:30709},37:{m:33238,f:31377},38:{m:37081,f:34201},39:{m:41380,f:36977},40:{m:46234,f:39609},41:{m:55695,f:41796},42:{m:61863,f:45237},43:{m:69140,f:49235},44:{m:77573,f:53888},45:{m:86716,f:59097},46:{m:96617,f:65964},47:{m:106679,f:72036},48:{m:116901,f:78367},49:{m:127485,f:84807},50:{m:139183,f:90656},51:{m:152496,f:112064},52:{m:167674,f:120283},53:{m:185422,f:133764},54:{m:206087,f:141909},55:{m:229274,f:150720},56:{m:255434,f:162200},57:{m:284371,f:177450},58:{m:314884,f:192471},59:{m:350330,f:211366},60:{m:393460,f:236786},61:{m:441376,f:264483},62:{m:493280,f:285458},63:{m:531176,f:305918},64:{m:599568,f:327266},65:{m:670161,f:372905},66:{m:693940,f:388881},67:{m:755134,f:433411},68:{m:801635,f:483992},69:{m:875295,f:540679},70:{m:963965,f:575274}},
+  6000000:{20:{m:25321,f:18560},21:{m:26677,f:18651},22:{m:27316,f:18802},23:{m:27837,f:19675},24:{m:28899,f:20971},25:{m:29124,f:21788},26:{m:29592,f:22247},27:{m:29941,f:24148},28:{m:30354,f:26351},29:{m:31310,f:27477},30:{m:31910,f:28005},31:{m:32991,f:28594},32:{m:35518,f:31648},33:{m:36426,f:32722},34:{m:37040,f:35781},35:{m:37238,f:36024},36:{m:37980,f:36449},37:{m:39388,f:37237},38:{m:43981,f:40611},39:{m:49120,f:43927},40:{m:54924,f:47069},41:{m:66255,f:49676},42:{m:73633,f:53787},43:{m:82340,f:58565},44:{m:92433,f:64128},45:{m:103376,f:70357},46:{m:115227,f:78574},47:{m:127269,f:85836},48:{m:139501,f:93407},49:{m:152165,f:101107},50:{m:166163,f:108096},51:{m:182096,f:133754},52:{m:200264,f:143583},53:{m:221512,f:159724},54:{m:246257,f:169459},55:{m:274024,f:179990},56:{m:305354,f:193720},57:{m:340011,f:211970},58:{m:376554,f:229941},59:{m:419010,f:252556},60:{m:470680,f:282996},61:{m:528086,f:316163},62:{m:590270,f:341258},63:{m:635636,f:365728},64:{m:717588,f:391256},65:{m:802171,f:445925},66:{m:830570,f:464991},67:{m:903854,f:518311},68:{m:959495,f:578882},69:{m:1047715,f:646769},70:{m:1153935,f:688134}},
+  7000000:{20:{m:29291,f:21440},21:{m:30867,f:21541},22:{m:31606,f:21712},23:{m:32207,f:22725},24:{m:33439,f:24231},25:{m:33694,f:25178},26:{m:34232,f:25707},27:{m:34631,f:27918},28:{m:35104,f:30481},29:{m:36210,f:31787},30:{m:36900,f:32395},31:{m:38151,f:33074},32:{m:41088,f:36628},33:{m:42136,f:37872},34:{m:42840,f:41431},35:{m:43058,f:41704},36:{m:43910,f:42189},37:{m:45538,f:43097},38:{m:50881,f:47021},39:{m:56860,f:50877},40:{m:63614,f:54529},41:{m:76815,f:57556},42:{m:85403,f:62337},43:{m:95540,f:67895},44:{m:107293,f:74368},45:{m:120036,f:81617},46:{m:133837,f:91184},47:{m:147859,f:99636},48:{m:162101,f:108447},49:{m:176845,f:117407},50:{m:193143,f:125536},51:{m:211696,f:155444},52:{m:232854,f:166883},53:{m:257602,f:185684},54:{m:286427,f:197009},55:{m:318774,f:209260},56:{m:355274,f:225240},57:{m:395651,f:246490},58:{m:438224,f:267411},59:{m:487690,f:293746},60:{m:547900,f:329206},61:{m:614796,f:367843},62:{m:687260,f:397058},63:{m:740096,f:425538},64:{m:835608,f:455246},65:{m:934181,f:518945},66:{m:967200,f:541101},67:{m:1052574,f:603211},68:{m:1117355,f:673772},69:{m:1220135,f:752859},70:{m:1343905,f:800994}},
+  8000000:{20:{m:33261,f:24320},21:{m:35057,f:24431},22:{m:35896,f:24622},23:{m:36577,f:25775},24:{m:37979,f:27491},25:{m:38264,f:28568},26:{m:38872,f:29167},27:{m:39321,f:31688},28:{m:39854,f:34611},29:{m:41110,f:36097},30:{m:41890,f:36785},31:{m:43311,f:37554},32:{m:46658,f:41608},33:{m:47846,f:43022},34:{m:48640,f:47081},35:{m:48878,f:47384},36:{m:49840,f:47929},37:{m:51688,f:48957},38:{m:57781,f:53431},39:{m:64600,f:57827},40:{m:72304,f:61989},41:{m:87375,f:65436},42:{m:97173,f:70887},43:{m:108740,f:77225},44:{m:122153,f:84608},45:{m:136696,f:92877},46:{m:152447,f:103794},47:{m:168449,f:113436},48:{m:184701,f:123487},49:{m:201525,f:133707},50:{m:220123,f:142976},51:{m:241296,f:177134},52:{m:265444,f:190183},53:{m:293692,f:211644},54:{m:326597,f:224559},55:{m:363524,f:238530},56:{m:405194,f:256760},57:{m:451291,f:281010},58:{m:499894,f:304881},59:{m:556370,f:334936},60:{m:625120,f:375416},61:{m:701506,f:419523},62:{m:784250,f:452858},63:{m:844556,f:485348},64:{m:953628,f:519236},65:{m:1066191,f:591965},66:{m:1103830,f:617211},67:{m:1201294,f:688111},68:{m:1275215,f:768662},69:{m:1392555,f:858949},70:{m:1533875,f:913854}},
+  9000000:{20:{m:37231,f:27200},21:{m:39247,f:27321},22:{m:40186,f:27532},23:{m:40947,f:28825},24:{m:42519,f:30751},25:{m:42834,f:31958},26:{m:43512,f:32627},27:{m:44011,f:35458},28:{m:44604,f:38741},29:{m:46010,f:40407},30:{m:46880,f:41175},31:{m:48471,f:42034},32:{m:52228,f:46588},33:{m:53556,f:48172},34:{m:54440,f:52731},35:{m:54698,f:53064},36:{m:55770,f:53669},37:{m:57838,f:54817},38:{m:64681,f:59841},39:{m:72340,f:64777},40:{m:80994,f:69449},41:{m:97935,f:73316},42:{m:108943,f:79437},43:{m:121940,f:86555},44:{m:137013,f:94848},45:{m:153356,f:104137},46:{m:171057,f:116404},47:{m:189039,f:127236},48:{m:207301,f:138527},49:{m:226205,f:150007},50:{m:247103,f:160416},51:{m:270896,f:198824},52:{m:298034,f:213483},53:{m:329782,f:237604},54:{m:366767,f:252109},55:{m:408274,f:267800},56:{m:455114,f:288280},57:{m:506931,f:315530},58:{m:561564,f:342351},59:{m:625050,f:376126},60:{m:702340,f:421626},61:{m:788216,f:471203},62:{m:881240,f:508658},63:{m:949016,f:545158},64:{m:1071648,f:583226},65:{m:1198201,f:664985},66:{m:1240460,f:693321},67:{m:1350014,f:773011},68:{m:1433075,f:863552},69:{m:1564975,f:965039},70:{m:1723845,f:1026714}},
+  10000000:{20:{m:41201,f:30080},21:{m:43437,f:30211},22:{m:44476,f:30442},23:{m:45317,f:31875},24:{m:47059,f:34011},25:{m:47404,f:35348},26:{m:48152,f:36087},27:{m:48701,f:39228},28:{m:49354,f:42871},29:{m:50910,f:44717},30:{m:51870,f:45565},31:{m:53631,f:46514},32:{m:57798,f:51568},33:{m:59266,f:53322},34:{m:60240,f:58381},35:{m:60518,f:58744},36:{m:61700,f:59409},37:{m:63988,f:60677},38:{m:71581,f:66251},39:{m:80080,f:71727},40:{m:89684,f:76909},41:{m:108495,f:81196},42:{m:120713,f:87987},43:{m:135140,f:95885},44:{m:151873,f:105088},45:{m:170016,f:115397},46:{m:189667,f:129014},47:{m:209629,f:141036},48:{m:229901,f:153567},49:{m:250885,f:166307},50:{m:274083,f:177856},51:{m:300496,f:220514},52:{m:330624,f:236783},53:{m:365872,f:263564},54:{m:406937,f:279659},55:{m:453024,f:297070},56:{m:505034,f:319800},57:{m:562571,f:350050},58:{m:623234,f:379821},59:{m:693730,f:417316},60:{m:779560,f:467836},61:{m:874926,f:522883},62:{m:978230,f:564458},63:{m:1053476,f:604968},64:{m:1189668,f:647216},65:{m:1330211,f:738005},66:{m:1377090,f:769431},67:{m:1498734,f:857911},68:{m:1590935,f:958442},69:{m:1737395,f:1071129},70:{m:1913815,f:1139574}}
+};
+const CI_MAX={500000:'5.5M',1000000:'11M',2000000:'22M',3000000:'33M',5000000:'55M',6000000:'66M',7000000:'77M',8000000:'88M',9000000:'99M',10000000:'110M'};
+
+// LEGACY data (เบี้ยรวม)
+const LEG={
+  1000000:{m:{20:5244,21:5412,22:5536,23:5696,24:5744,25:5892,26:6036,27:6200,28:6376,29:6532,30:6724,31:6920,32:7168,33:7428,34:7740,35:8048,36:8516,37:8860,38:9192,39:9568,40:9984,41:10472,42:11036,43:11656,44:12316,45:12932,46:13696,47:14436,48:15176,49:15948,50:16768,51:17452,52:18484,53:19520,54:20872,55:22132,56:23884,57:25804,58:27720,59:29584,60:32072,61:35136,62:38304,63:41672,64:45516,65:51100},f:{20:3844,21:3924,22:4036,23:4156,24:4292,25:4484,26:4620,27:4768,28:4956,29:5136,30:5360,31:5588,32:5896,33:6204,34:6584,35:6940,36:7380,37:7768,38:8132,39:8488,40:8864,41:9180,42:9580,43:10104,44:10608,45:11152,46:11760,47:12404,48:12992,49:13628,50:14204,51:14812,52:15384,53:15800,54:16368,55:16936,56:17780,57:18796,58:19816,59:21000,60:22580,61:24476,62:26596,63:28464,64:30544,65:34152}},
+  2000000:{m:{20:7124,21:7352,22:7506,23:7716,24:7824,25:8032,26:8206,27:8450,28:8696,29:8922,30:9204,31:9520,32:9928,33:10388,34:10940,35:11508,36:12286,37:12910,38:13532,39:14228,40:14964,41:15862,42:16856,43:17976,44:16568,45:20422,46:21866,47:23256,48:24646,49:26108,50:27678,51:28942,52:30864,53:32920,54:35412,55:37972,56:41364,57:45134,58:49020,59:52814,60:57862,61:64206,62:70634,63:77662,64:85636,65:97500},f:{20:4924,21:5004,22:5156,23:5326,24:5532,25:5814,26:6020,27:6278,28:6576,29:6856,30:7210,31:7598,32:8116,33:8684,34:9364,35:10040,36:10830,37:11528,38:12172,39:12798,40:13444,41:13980,42:14730,43:15634,44:16568,45:17592,46:18760,47:19934,48:21032,49:22188,50:23234,51:24352,52:25264,53:25950,54:26778,55:27656,56:29130,57:31016,58:32886,59:35150,60:38280,61:42146,62:46366,63:50144,64:54274,65:61842}},
+  3000000:{m:{20:9004,21:9292,22:9476,23:9736,24:9904,25:10172,26:10376,27:10700,28:11016,29:11312,30:11684,31:12120,32:12688,33:13348,34:14968,35:14968,36:16056,37:16960,38:17872,39:18888,40:19944,41:21252,42:22676,43:24296,44:26056,45:27912,46:30036,47:32076,48:34116,49:36268,50:38588,51:40432,52:43244,53:46320,54:49952,55:53812,56:58844,57:64464,58:70320,59:76044,60:83652,61:93276,62:102964,63:113652,64:125756,65:143900},f:{20:6004,21:6084,22:6276,23:6496,24:6772,25:7144,26:7420,27:7788,28:8196,29:8576,30:9060,31:9608,32:10336,33:11164,34:12144,35:13140,36:14280,37:15288,38:16212,39:17108,40:18024,41:18780,42:19880,43:21164,44:22528,45:24032,46:25760,47:27464,48:29072,49:30748,50:32264,51:33892,52:33892,53:35144,54:37188,55:38376,56:40480,57:43236,58:45956,59:49300,60:53980,61:59816,62:66136,63:71824,64:71824,65:89564}},
+  5000000:{m:{20:12764,21:13172,22:13416,23:13776,24:14064,25:14452,26:14716,27:15200,28:15656,29:16092,30:16644,31:17320,32:18208,33:16124,34:20540,35:21888,36:23596,37:25060,38:26552,39:28208,40:29904,41:32032,42:34316,43:36936,44:39796,45:42892,46:46376,47:49716,48:53056,49:56588,50:60408,51:63412,52:68004,53:73120,54:79032,55:85492,56:93804,57:103124,58:112920,59:122504,60:135232,61:151416,62:167624,63:185632,64:205996,65:236700},f:{20:8164,21:8244,22:8516,23:8836,24:9252,25:9804,26:10220,27:10808,28:11436,29:12016,30:12760,31:13628,32:14776,33:16124,34:17704,35:19340,36:21180,37:22808,38:24292,39:25728,40:27184,41:28380,42:30180,43:32224,44:34448,45:36912,46:39760,47:42524,48:45152,49:47868,50:50324,51:52972,52:54904,53:56400,54:58008,55:59816,56:63180,57:67676,58:72096,59:77600,60:85380,61:95156,62:105676,63:115184,64:125464,65:144912}}
+};
+
+// PRECIOUS CARE data (เบี้ยต่อทุน 1,000 บาท × วงเงิน/1000)
+// เก็บเป็นเบี้ยรวมต่อปี (rate per 1000 × sum)
+// 1M=1,000,000 → rate×1000; 3M→rate×3000; 6M→rate×6000; 12M→rate×12000
+// ค่าห้อง: 1M=2500, 3M=4000, 6M=6000, 12M=8000
+// ผู้ป่วยนอก: 1M=3000, 3M=5000, 6M=10000, 12M=18000
+// ทุนประกัน: ทุกแผน 60,000
+// ข้อมูลเบี้ย = เบี้ยรายปี ต่อทุน 1,000 บาท × จำนวนทุน/1000
+
+const PC_RATE={
+  m:{20:19398,21:18834,22:18271,23:18538,24:18805,25:19073,26:19343,27:19613,28:19774,29:19936,30:20101,31:20265,32:20432,33:20905,34:21379,35:21856,36:22334,37:22814,38:22971,39:23128,40:23289,41:23451,42:23617,43:24301,44:24989,45:25679,46:26373,47:27071,48:27545,49:28024,50:28507,51:28996,52:29490,53:31683,54:33882,55:36087,56:38302,57:40526,58:42311,59:44107,60:45914,61:47734,62:49568,63:54849,64:60147,65:65463,66:70797,67:76153,68:85538,69:94947,70:104384,71:113848,72:123343,73:131529,74:139748,75:148002},
+  f:{20:19273,21:18705,22:18139,23:18402,24:18665,25:18930,26:19196,27:19462,28:19618,29:19775,30:19934,31:20093,32:20254,33:20720,34:21189,35:21659,36:22130,37:22602,38:22751,39:22900,40:23052,41:23206,42:23362,43:24036,44:24713,45:25392,46:26074,47:26759,48:27220,49:27686,50:28155,51:28627,52:29106,53:31281,54:33461,55:35648,56:37841,57:40042,58:41803,59:43574,60:45353,61:47143,62:48945,63:54193,64:59456,65:64734,66:70030,67:75344,68:84685,69:94047,70:103433,71:112844,72:122282,73:130407,74:138562,75:146750}
+};
+
+// PC เบี้ยรายปีตามวงเงิน = rate × (sum/1000) — แต่จาก PDF เห็นว่าเบี้ยต่อทุน 1000 บาท
+// 1M plan: 19,398/1000 × 1,000,000 = 19,398 ??? ไม่ใช่
+// จาก PDF: อายุ 20 ชาย แผน 1M = 19,398, แผน 3M = 26,884, แผน 6M = 31,122, แผน 12M = 37,381
+// นี่คือเบี้ยจริงตามแผน ไม่ใช่ rate×sum
+
+const PC={
+  1000000:{
+    m:{20:19398,21:18834,22:18271,23:18538,24:18805,25:19073,26:19343,27:19613,28:19774,29:19936,30:20101,31:20265,32:20432,33:20905,34:21379,35:21856,36:22334,37:22814,38:22971,39:23128,40:23289,41:23451,42:23617,43:24301,44:24989,45:25679,46:26373,47:27071,48:27545,49:28024,50:28507,51:28996,52:29490,53:31683,54:33882,55:36087,56:38302,57:40526,58:42311,59:44107,60:45914,61:47734,62:49568,63:54849,64:60147,65:65463,66:70797,67:76153,68:85538,69:94947,70:104384,71:113848,72:123343,73:131529,74:139748,75:148002},
+    f:{20:19273,21:18705,22:18139,23:18402,24:18665,25:18930,26:19196,27:19462,28:19618,29:19775,30:19934,31:20093,32:20254,33:20720,34:21189,35:21659,36:22130,37:22602,38:22751,39:22900,40:23052,41:23206,42:23362,43:24036,44:24713,45:25392,46:26074,47:26759,48:27220,49:27686,50:28155,51:28627,52:29106,53:31281,54:33461,55:35648,56:37841,57:40042,58:41803,59:43574,60:45353,61:47143,62:48945,63:54193,64:59456,65:64734,66:70030,67:75344,68:84685,69:94047,70:103433,71:112844,72:122282,73:130407,74:138562,75:146750}
+  },
+  3000000:{
+    m:{20:26884,21:26293,22:25703,23:26168,24:26634,25:27100,26:27567,27:28035,28:28400,29:28766,30:29134,31:29501,32:29872,33:30048,34:30225,35:30405,36:30586,37:30769,38:30916,39:31063,40:31214,41:31366,42:31522,43:32923,44:34328,45:35735,46:37146,47:38561,48:39759,49:40960,50:42167,51:43380,52:44596,53:45986,54:47381,55:48782,56:50193,57:51613,58:53438,59:55274,60:57121,61:58981,62:60855,63:65617,64:70395,65:75192,66:80006,67:84843,68:95326,69:105835,70:116370,71:126934,72:137527,73:146655,74:155817,75:165013},
+    f:{20:26759,21:26164,22:25571,23:26032,24:26494,25:26957,26:27420,27:27884,28:28244,29:28605,30:28967,31:29329,32:29694,33:29863,34:30035,35:30208,36:30382,37:30557,38:30696,39:30835,40:30977,41:31121,42:31267,43:32658,44:34052,45:35448,46:36847,47:38249,48:39434,49:40622,50:41815,51:43011,52:44212,53:45584,54:46960,55:48343,56:49732,57:51129,58:52930,59:54741,60:56560,61:58390,62:60232,63:64961,64:69704,65:74463,66:79239,67:84034,68:94473,69:104935,70:115419,71:125930,72:136466,73:145533,74:154631,75:163761}
+  },
+  6000000:{
+    m:{20:31122,21:30545,22:29968,23:30382,24:30796,25:31211,26:31627,27:32044,28:32451,29:32858,30:33268,31:33677,32:34090,33:34350,34:34611,35:34875,36:35140,37:35407,38:35547,39:35688,40:35832,41:35979,42:36128,43:37529,44:38935,45:40342,46:41754,47:43169,48:44504,49:45843,50:47186,51:48536,52:49890,53:51474,54:53065,55:54662,56:56268,57:57883,58:59920,59:61967,60:64026,61:66097,62:68183,63:73557,64:78948,65:84358,66:89785,67:95234,68:107017,69:118825,70:130661,71:142524,72:154417,73:164797,74:175210,75:185658},
+    f:{20:30997,21:30416,22:29836,23:30246,24:30656,25:31068,26:31480,27:31893,28:32295,29:32697,30:33101,31:33505,32:33912,33:34165,34:34421,35:34678,36:34936,37:35195,38:35327,39:35460,40:35595,41:35734,42:35873,43:37264,44:38659,45:40055,46:41455,47:42857,48:44179,49:45505,50:46834,51:48167,52:49506,53:51072,54:52644,55:54223,56:55807,57:57399,58:59412,59:61434,60:63465,61:65506,62:67560,63:72901,64:78257,65:83629,66:89018,67:94425,68:106164,69:117925,70:129710,71:141520,72:153356,73:163675,74:174024,75:184406}
+  },
+  12000000:{
+    m:{20:37381,21:36985,22:36589,23:36826,24:37062,25:37300,26:37538,27:37778,28:38137,29:38497,30:38860,31:39222,32:39587,33:40318,34:41049,35:41784,36:42519,37:43257,38:44294,39:45332,40:46373,41:47416,42:48462,43:49239,44:50020,45:50803,46:51590,47:52382,48:54560,49:56743,50:58931,51:61125,52:63322,53:65216,54:67116,55:69022,56:70938,57:72861,58:75369,59:77887,60:80416,61:82959,62:85515,63:93180,64:100862,65:108562,66:116280,67:124020,68:139403,69:154812,70:170247,71:185711,72:201204,73:214611,74:228050,75:241525},
+    f:{20:37256,21:36856,22:36457,23:36690,24:36922,25:37157,26:37391,27:37627,28:37981,29:38336,30:38693,31:39050,32:39409,33:40133,34:40859,35:41587,36:42315,37:43045,38:44074,39:45104,40:46136,41:47171,42:48207,43:48974,44:49744,45:50516,46:51291,47:52070,48:54235,49:56405,50:58579,51:60756,52:62938,53:64814,54:66695,55:68583,56:70477,57:72377,58:74861,59:77354,60:79855,61:82368,62:84892,63:92524,64:100171,65:107833,66:115513,67:123211,68:138550,69:153912,70:169296,71:184707,72:200143,73:213489,74:226864,75:240273}
+  }
+};
+
+// PC room/OPD info
+const PC_INFO={
+  1000000:{room:2500,opd:3000,life:60000},
+  3000000:{room:4000,opd:5000,life:60000},
+  6000000:{room:6000,opd:10000,life:60000},
+  12000000:{room:8000,opd:18000,life:60000}
+};
+
+// ═══════════════════════════
+// STATE
+// ═══════════════════════════
+let mode='ci', gender='male', ciAmt=3000000, legAmt=2000000, pcAmt=3000000;
+
+function fmt(n){return n?n.toLocaleString('th-TH'):'0';}
+
+// ── SWITCH TAB ──
+function sw(m){
+  mode=m;
+  ['tabCI','tabLeg','tabPC'].forEach(id=>document.getElementById(id).className='tab-btn');
+  if(m==='ci') document.getElementById('tabCI').className='tab-btn t-ci';
+  else if(m==='leg') document.getElementById('tabLeg').className='tab-btn t-leg';
+  else document.getElementById('tabPC').className='tab-btn t-pc';
+
+  const h=document.getElementById('heroEl');
+  h.className='hero'+(m==='leg'?' m-leg':m==='pc'?' m-pc':'');
+
+  const titles={ci:'โรคร้ายแรง<br><em>CI Re-Claim Re-Care</em>',leg:'ประกันมรดก<br><em>Dragon Group · FWD</em>',pc:'ประกันสุขภาพ<br><em>พรีเชียส แคร์ โพรเทคชั่น</em>'};
+  const descs={ci:'กรอกข้อมูลเพื่อดูเบี้ยประกัน CI ที่เหมาะกับคุณ',leg:'วางแผนส่งต่อมรดกให้ทายาท ด้วยประกันชีวิต FWD',pc:'เช็คเบี้ยสุขภาพเหมาจ่าย วงเงินสูงสุด 12 ล้าน/ปี'};
+  const ftitles={ci:'🔍 ค้นหาเบี้ย CI โรคร้ายแรง',leg:'🔍 ค้นหาเบี้ยประกันมรดก',pc:'🔍 ค้นหาเบี้ยพรีเชียส แคร์'};
+
+  document.getElementById('htitle').innerHTML=titles[m];
+  document.getElementById('hdesc').textContent=descs[m];
+  document.getElementById('ftitle').textContent=ftitles[m];
+  document.getElementById('secCI').style.display=m==='ci'?'':'none';
+  document.getElementById('secLeg').style.display=m==='leg'?'':'none';
+  document.getElementById('secPC').style.display=m==='pc'?'':'none';
+
+  const btnMap={ci:'s-ci',leg:'s-leg',pc:'s-pc'};
+  document.getElementById('sbtn').className='sbtn '+btnMap[m];
+
+  updateGen();
+  hide();
+}
+
+function setG(g){gender=g;updateGen();}
+
+function updateGen(){
+  const ac={ci:'g-ci',leg:'g-leg',pc:'g-pc'};
+  const cls=ac[mode]||'g-ci';
+  document.getElementById('btnM').className='gbtn'+(gender==='male'?' '+cls:'');
+  document.getElementById('btnF').className='gbtn'+(gender==='female'?' '+cls:'');
+}
+
+function pick(type,amt,el){
+  if(type==='ci') ciAmt=amt;
+  else if(type==='leg') legAmt=amt;
+  else pcAmt=amt;
+  const prefix=type==='ci'?'ci':type==='leg'?'leg':'pc';
+  const clsMap={ci:'a-ci',leg:'a-leg',pc:'a-pc'};
+  document.querySelectorAll('#'+prefix+'Amts .abtn').forEach(b=>b.classList.remove('a-ci','a-leg','a-pc'));
+  el.classList.add(clsMap[type]);
+}
+
+function hide(){
+  document.getElementById('resSec').classList.remove('show');
+  document.getElementById('noresEl').style.display='none';
+  document.getElementById('qrEl').style.display='none';
+}
+
+// ── SEARCH ──
+function doSearch(){
+  const age=parseInt(document.getElementById('inAge').value);
+  const errEl=document.getElementById('ageErr');
+  const maxA=mode==='leg'?65:mode==='pc'?75:70;
+  const minA=mode==='leg'?20:mode==='pc'?20:1;
+  if(!age||age<minA||age>maxA){
+    errEl.textContent='กรุณากรอกอายุ '+minA+'-'+maxA+' ปี';
+    errEl.style.display='block';
+    document.getElementById('inAge').classList.add('err');
+    return;
+  }
+  errEl.style.display='none';
+  document.getElementById('inAge').classList.remove('err');
+  document.getElementById('loadEl').style.display='block';
+  document.getElementById('spinEl').className='spinner sp-'+mode;
+  hide();
+
+  setTimeout(()=>{
+    document.getElementById('loadEl').style.display='none';
+    let p=null;
+    if(mode==='ci'){const d=CI[ciAmt];if(d&&d[age])p=gender==='male'?d[age].m:d[age].f;}
+    else if(mode==='leg'){const d=LEG[legAmt];if(d)p=gender==='male'?d.m[age]:d.f[age];}
+    else{const d=PC[pcAmt];if(d)p=gender==='male'?d.m[age]:d.f[age];}
+    if(!p){document.getElementById('noresEl').style.display='block';return;}
+    render(age,p);
+  },600);
+}
+
+function render(age,prem){
+  const mo=Math.ceil(prem/12);
+  const g=gender==='male'?'ชาย':'หญิง';
+
+  const hdrCls={ci:'rh-ci',leg:'rh-leg',pc:'rh-pc'};
+  document.getElementById('rHdr').className='res-hdr '+hdrCls[mode];
+
+  const pvCls={ci:'pval pval-ci',leg:'pval pval-leg',pc:'pval pval-pc'};
+  document.getElementById('rPrem').className=pvCls[mode];
+  document.getElementById('rPrem').innerHTML=fmt(prem)+'<span>บาท/ปี</span>';
+  document.getElementById('rMo').textContent='≈ '+fmt(mo)+' บาท/เดือน';
+
+  const exCls={ci:'dv dv-ci',leg:'dv dv-leg',pc:'dv dv-pc'};
+
+  if(mode==='ci'){
+    const cL=ciAmt>=1000000?(ciAmt/1000000)+' ล้าน':fmt(ciAmt);
+    document.getElementById('rPlan').textContent='CI Re-Claim Re-Care Plus';
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='ทุน CI Re-Claim';
+    document.getElementById('rSum').textContent=cL+' บาท';
+    document.getElementById('rLife').textContent='200,000 ฿';
+    document.getElementById('rExLbl').textContent='เคลมสูงสุด';
+    document.getElementById('rEx').className=exCls.ci;
+    document.getElementById('rEx').textContent=CI_MAX[ciAmt]||'-';
+    document.getElementById('rCov').textContent='99 ปี';
+    document.getElementById('rAcc').textContent='1-70 ปี';
+    document.getElementById('covList').innerHTML=`
+      <div class="cov"><div class="ck">✓</div><div>โรคร้ายแรง 50 โรค (มะเร็ง หัวใจ เส้นเลือดสมอง ฯลฯ)</div></div>
+      <div class="cov"><div class="ck">✓</div><div>Re-Claim ได้ทุกปี ไม่หมดสิทธิ์</div></div>
+      <div class="cov"><div class="ck">✓</div><div>Re-Care ดูแลสุขภาพหลังป่วยโรคร้าย</div></div>
+      <div class="cov"><div class="ck">✓</div><div>ทุนชีวิต 200,000 บาท ถึงอายุ 99 ปี</div></div>`;
+    document.getElementById('ctaLine').className='cbtn cb-ci';
+    document.getElementById('ctaAppt').className='cbtn cb-out-ci';
+  } else if(mode==='leg'){
+    const lL=(legAmt/1000000)+' ล้านบาท';
+    const ciB={1000000:'800,000',2000000:'1,800,000',3000000:'2,800,000',5000000:'4,800,000'}[legAmt]||'-';
+    document.getElementById('rPlan').textContent='ประกันมรดก '+lL;
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='ทุนประกันชีวิต';
+    document.getElementById('rSum').textContent=lL;
+    document.getElementById('rLife').textContent=fmt(legAmt)+' ฿';
+    document.getElementById('rExLbl').textContent='ทุนโรคร้ายแรง';
+    document.getElementById('rEx').className=exCls.leg;
+    document.getElementById('rEx').textContent=ciB+' ฿';
+    document.getElementById('rCov').textContent='98 ปี';
+    document.getElementById('rAcc').textContent='20-65 ปี';
+    document.getElementById('covList').innerHTML=`
+      <div class="cov"><div class="ck">✓</div><div>ทุนชีวิต ${lL} ส่งต่อให้ทายาท</div></div>
+      <div class="cov"><div class="ck">✓</div><div>โรคร้ายแรง ${ciB} บาท ครอบคลุม 50 โรค</div></div>
+      <div class="cov"><div class="ck">✓</div><div>เบี้ยคงที่ตลอดสัญญา วางแผนการเงินได้ง่าย</div></div>
+      <div class="cov"><div class="ck">✓</div><div>คุ้มครองชีวิตครบถ้วน ไม่มีผลรอดชีวิต</div></div>`;
+    document.getElementById('ctaLine').className='cbtn cb-leg';
+    document.getElementById('ctaAppt').className='cbtn cb-out-leg';
+  } else {
+    const pL=(pcAmt/1000000)+' ล้านบาท';
+    const info=PC_INFO[pcAmt];
+    document.getElementById('rPlan').textContent='FWD พรีเชียส แคร์ '+pL;
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='วงเงิน/ปี';
+    document.getElementById('rSum').textContent=pL;
+    document.getElementById('rLife').textContent=fmt(info.life)+' ฿';
+    document.getElementById('rExLbl').textContent='วงเงินผู้ป่วยนอก';
+    document.getElementById('rEx').className=exCls.pc;
+    document.getElementById('rEx').textContent=fmt(info.opd)+' ฿/ครั้ง';
+    document.getElementById('rCov').textContent='99 ปี';
+    document.getElementById('rAcc').textContent='20-75 ปี';
+    document.getElementById('covList').innerHTML=`
+      <div class="cov"><div class="ck">✓</div><div>เหมาจ่าย ${pL}/ปี ไม่มีความรับผิดส่วนแรก</div></div>
+      <div class="cov"><div class="ck">✓</div><div>ค่าห้อง ${fmt(info.room)} บาท/คืน (ไม่จำกัดวัน)</div></div>
+      <div class="cov"><div class="ck">✓</div><div>ผู้ป่วยนอก ${fmt(info.opd)} บาท/ครั้ง</div></div>
+      <div class="cov"><div class="ck">✓</div><div>ทุนชีวิต ${fmt(info.life)} บาท คุ้มครองถึงอายุ 99 ปี</div></div>`;
+    document.getElementById('ctaLine').className='cbtn cb-pc';
+    document.getElementById('ctaAppt').className='cbtn cb-out-pc';
+  }
+
+  document.getElementById('resSec').classList.add('show');
+  setTimeout(()=>{document.getElementById('resSec').scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+
+function showQR(){
+  document.getElementById('qrEl').style.display='block';
+  setTimeout(()=>{document.getElementById('qrEl').scrollIntoView({behavior:'smooth',block:'center'});},100);
+}
+
+function openAppt(){
+  document.getElementById('mbody').style.display='block';
+  document.getElementById('ssEl').style.display='none';
+  const age=document.getElementById('inAge').value;
+  if(age){
+    const mL=mode==='ci'?'CI '+(ciAmt>=1000000?ciAmt/1000000+'M':ciAmt):mode==='leg'?'มรดก '+(legAmt/1000000)+'M':'พรีเชียส '+(pcAmt/1000000)+'M';
+    document.getElementById('aNote').value='สนใจแผน '+mL+' อายุ '+age+' ปี '+(gender==='male'?'ชาย':'หญิง');
+  }
+  document.getElementById('apptMov').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeAppt(){document.getElementById('apptMov').classList.remove('show');document.body.style.overflow='';}
+function closeApptOut(e){if(e.target===document.getElementById('apptMov'))closeAppt();}
+
+function submitAppt(){
+  const n=document.getElementById('aName').value.trim();
+  const p=document.getElementById('aPhone').value.trim();
+  if(!n||!p){alert('กรุณากรอกชื่อและเบอร์โทรศัพท์ครับ');return;}
+  document.getElementById('mbody').style.display='none';
+  document.getElementById('ssEl').style.display='block';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('inAge').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+  const t=new Date().toISOString().split('T')[0];
+  document.getElementById('aDate').min=t;
+});
+</script>
+</body>
+</html>
