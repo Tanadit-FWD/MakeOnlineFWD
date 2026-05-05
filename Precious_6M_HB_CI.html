@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FWD Plan - คุณกรกช</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6200;
+    --orange2: #FF8C42;
+    --dark: #141414;
+    --charcoal: #252525;
+    --gray: #888;
+    --white: #FFFFFF;
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --gold: #B45309;
+    --gold-light: #FEF3C7;
+    --blue: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --green: #15803D;
+    --green-light: #DCFCE7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #E8E8E4;
+    font-family: 'Sarabun', sans-serif;
+    padding: 20px;
+  }
+
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.14);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--dark);
+    padding: 26px 28px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,98,0,0.2), transparent 65%);
+  }
+
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fwd {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--orange);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .fwd sub {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1px;
+  }
+
+  .plan-type {
+    background: rgba(255,98,0,0.12);
+    border: 1px solid rgba(255,98,0,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--orange2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-body { position: relative; z-index: 1; }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 5px;
+  }
+
+  .plan-name {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .plan-name em { color: var(--orange); font-style: normal; }
+
+  .plan-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+  }
+
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; }
+
+  .chip {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* STAR BAND */
+  .star-band {
+    background: linear-gradient(135deg, #FF6200 0%, #D94E00 100%);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sb-left .sb-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .sb-value {
+    font-family: 'Prompt', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+
+  .sb-value span { font-size: 15px; font-weight: 600; opacity: 0.8; margin-left: 2px; }
+
+  .sb-note { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+  .sb-right { text-align: right; }
+
+  .sb-tag {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  .sb-tag2 { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* PREMIUM STRIP */
+  .pstrip {
+    background: var(--charcoal);
+    padding: 15px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ps-lbl { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
+
+  .ps-num {
+    font-family: 'Prompt', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+
+  .ps-num sub { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.35); margin-left: 3px; }
+
+  .ps-mo { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  .ps-r { text-align: right; }
+  .ps-r .lbl { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .ps-r .val { font-family: 'Prompt', sans-serif; font-size: 17px; font-weight: 700; color: var(--orange); }
+
+  /* SECTION */
+  .sec { padding: 20px 28px; border-bottom: 1px solid #F0F0F0; }
+  .sec:last-child { border-bottom: none; }
+
+  .sec-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  /* COV ROWS */
+  .crow { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #F8F8F8; }
+  .crow:last-child { border-bottom: none; }
+
+  .ci {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .ci-info { flex: 1; }
+  .ci-name { font-size: 13.5px; font-weight: 600; color: var(--dark); line-height: 1.3; }
+  .ci-sub  { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+  .ci-right { text-align: right; }
+  .ci-sum { font-family: 'Prompt', sans-serif; font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1; }
+  .ci-prem { font-size: 11px; color: var(--gray); margin-top: 3px; }
+
+  .pill-free {
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+
+  /* GRID */
+  .hlg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .hl {
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .hl-ico { font-size: 20px; margin-bottom: 6px; }
+  .hl-val { font-family: 'Prompt', sans-serif; font-size: 18px; font-weight: 800; line-height: 1.1; }
+  .hl-lbl { font-size: 11px; margin-top: 3px; opacity: 0.72; }
+
+  .ha { background: #FFF7ED; color: var(--orange); }
+  .hb { background: var(--dark); color: white; }
+  .hc { background: var(--teal-light); color: var(--teal); }
+  .hd { background: var(--blue-light); color: var(--blue); }
+
+  /* PROS */
+  .pros { display: flex; flex-direction: column; gap: 10px; }
+
+  .pro { display: flex; gap: 11px; align-items: flex-start; }
+
+  .pn {
+    width: 24px; height: 24px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: white;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .pt { font-size: 13.5px; line-height: 1.55; color: var(--dark); }
+  .pt strong { color: var(--orange); }
+
+  /* VS BOX - compare 6M vs 12M */
+  .vs-box {
+    background: #FAFAFA;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .vs-head {
+    background: var(--orange);
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .vs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 16px;
+    border-bottom: 1px solid #F0F0F0;
+    font-size: 13px;
+  }
+
+  .vs-row:last-child { border-bottom: none; }
+
+  .vs-label { color: var(--gray); font-size: 12px; }
+  .vs-a { font-weight: 600; color: var(--dark); text-align: center; }
+  .vs-b { font-weight: 700; color: var(--orange); text-align: center; }
+
+  .vs-header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 8px 16px 4px;
+    font-size: 11px;
+    color: var(--gray);
+    border-bottom: 1px solid #EBEBEB;
+  }
+
+  .note-box {
+    background: #FFFBF5;
+    border-left: 3px solid var(--orange);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  /* VERDICT */
+  .verdict {
+    background: var(--dark);
+    padding: 26px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .verdict::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,98,0,0.15), transparent 70%);
+  }
+
+  .v-icon { font-size: 30px; margin-bottom: 8px; }
+
+  .v-title {
+    font-family: 'Prompt', sans-serif;
+    font-size: 21px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .v-title span { color: var(--orange); }
+
+  .v-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    max-width: 360px;
+    margin: 0 auto 18px;
+  }
+
+  .v-chips { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  .vc {
+    background: rgba(255,98,0,0.14);
+    border: 1px solid rgba(255,98,0,0.28);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--orange2);
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="fwd">FWD<sub>insurance</sub></div>
+      <div class="plan-type">HEALTH + LIFE</div>
+    </div>
+    <div class="hero-body">
+      <div class="eyebrow">สรุปแผนประกัน</div>
+      <div class="plan-name">FWD <em>พรีเชียส แคร์</em><br>โพรเทคชั่น</div>
+      <div class="plan-sub">เหมาจ่าย 6 ล้านบาท · ตลอดชีพ 90/20</div>
+      <div class="chips">
+        <div class="chip">👤 คุณกรกช</div>
+        <div class="chip">📅 อายุ 37 ปี</div>
+        <div class="chip">♂ เพศชาย</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAR BAND -->
+  <div class="star-band">
+    <div class="sb-left">
+      <div class="sb-label">วงเงินสูงสุดต่อปี</div>
+      <div class="sb-value">6<span>ล้านบาท</span></div>
+      <div class="sb-note">เหมาจ่าย · ไม่มีส่วนแรก</div>
+    </div>
+    <div class="sb-right">
+      <div class="sb-tag">✅ เหมาจ่าย 100%</div><br>
+      <div class="sb-tag2">ไม่ต้องสำรองจ่าย</div>
+    </div>
+  </div>
+
+  <!-- PREMIUM STRIP -->
+  <div class="pstrip">
+    <div>
+      <div class="ps-lbl">เบี้ยประกันรวมทั้งหมด</div>
+      <div class="ps-num">49,413<sub>บาท/ปี</sub></div>
+      <div class="ps-mo">≈ 4,118 บาท/เดือน</div>
+    </div>
+    <div class="ps-r">
+      <div class="lbl">คุ้มครองถึง</div>
+      <div class="val">อายุ 90 ปี</div>
+    </div>
+  </div>
+
+  <!-- COVERAGE -->
+  <div class="sec">
+    <div class="sec-title">📋 รายละเอียดความคุ้มครอง</div>
+
+    <div class="crow">
+      <div class="ci" style="background:#FFF0E6">🛡️</div>
+      <div class="ci-info">
+        <div class="ci-name">กรมธรรม์ตลอดชีพ 90/20</div>
+        <div class="ci-sub">แบบหลัก · จ่าย 20 ปี คุ้มครองถึง 90</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-sum">200,000</div>
+        <div class="ci-prem">5,620 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="crow">
+      <div class="ci" style="background:#EFF6FF">🏥</div>
+      <div class="ci-info">
+        <div class="ci-name">พรีเชียส แคร์ เหมาจ่าย</div>
+        <div class="ci-sub">แผน 6 ล้าน · ไม่มีความรับผิดส่วนแรก</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-sum" style="color:var(--orange)">6,000,000</div>
+        <div class="ci-prem">34,093 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="crow">
+      <div class="ci" style="background:#F0FDF4">🩺</div>
+      <div class="ci-info">
+        <div class="ci-name">ค่ารักษาพยาบาลรายวัน</div>
+        <div class="ci-sub">สัญญา HSB · ชดเชยนอน รพ.</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-sum">1,000<span style="font-size:10px;font-weight:400;color:#888">/วัน</span></div>
+        <div class="ci-prem">1,600 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="crow">
+      <div class="ci" style="background:#FEF9EE">💊</div>
+      <div class="ci-info">
+        <div class="ci-name">โรคร้ายแรง CI50</div>
+        <div class="ci-sub">50 โรคร้าย · มะเร็ง หัวใจ สมอง ฯลฯ</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-sum" style="color:var(--orange)">2,000,000</div>
+        <div class="ci-prem">8,100 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="crow">
+      <div class="ci" style="background:#F0FDF4">✨</div>
+      <div class="ci-info">
+        <div class="ci-name">ยกเว้นเบี้ยประกัน (PWB)</div>
+        <div class="ci-sub">กรณีทุพพลภาพถาวรสิ้นเชิง</div>
+      </div>
+      <div class="ci-right">
+        <div class="pill-free">ฟรี!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="sec">
+    <div class="sec-title">⚡ จุดเด่นสำคัญ</div>
+    <div class="hlg">
+      <div class="hl ha">
+        <div class="hl-ico">🏥</div>
+        <div class="hl-val">6 ล้าน</div>
+        <div class="hl-lbl">วงเงินค่ารักษา/ปี</div>
+      </div>
+      <div class="hl hb">
+        <div class="hl-ico">💊</div>
+        <div class="hl-val">2 ล้าน</div>
+        <div class="hl-lbl">ทุนโรคร้ายแรง</div>
+      </div>
+      <div class="hl hc">
+        <div class="hl-ico">✅</div>
+        <div class="hl-val">เหมาจ่าย</div>
+        <div class="hl-lbl">ไม่มีส่วนแรก</div>
+      </div>
+      <div class="hl hd">
+        <div class="hl-ico">🛡️</div>
+        <div class="hl-val">ถึง 90 ปี</div>
+        <div class="hl-lbl">คุ้มครองชีวิต</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY GOOD -->
+  <div class="sec">
+    <div class="sec-title">✅ ทำไมแผนนี้ถึงดี</div>
+    <div class="pros">
+      <div class="pro">
+        <div class="pn">1</div>
+        <div class="pt"><strong>เหมาจ่าย 6 ล้าน/ปี + CI 2 ล้าน</strong> ดับเบิ้ลคุ้มครอง ทั้งค่ารักษาและเงินก้อนเมื่อเป็นโรคร้าย</div>
+      </div>
+      <div class="pro">
+        <div class="pn">2</div>
+        <div class="pt">อายุ 37 เบี้ยยัง<strong>ไม่สูงมาก</strong> ถ้ารอจะแพงขึ้นทุกปี และอาจมีโรคประจำตัวทำให้รับประกันยากขึ้น</div>
+      </div>
+      <div class="pro">
+        <div class="pn">3</div>
+        <div class="pt">กรมธรรม์หลักตลอดชีพ 90/20 <strong>จ่ายแค่ 20 ปี</strong> แต่คุ้มครองถึงอายุ 90 ปี</div>
+      </div>
+      <div class="pro">
+        <div class="pn">4</div>
+        <div class="pt"><strong>PWB ฟรี</strong> ถ้าทุพพลภาพ ไม่ต้องจ่ายเบี้ยแต่ยังได้ทุกความคุ้มครองครบ</div>
+      </div>
+      <div class="pro">
+        <div class="pn">5</div>
+        <div class="pt">ครอบคลุม 4 มิติ: <strong>ชีวิต + สุขภาพ + โรคร้าย + รายได้ชดเชย</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="sec">
+    <div class="sec-title">🔍 เปรียบเทียบ: 6 ล้าน vs 12 ล้าน</div>
+    <div class="vs-box">
+      <div class="vs-head">พรีเชียส แคร์ เหมาจ่าย</div>
+      <div class="vs-header-row">
+        <div>รายการ</div>
+        <div style="text-align:center">แผน 6 ล้าน<br><span style="color:var(--orange);font-weight:700">แผนนี้</span></div>
+        <div style="text-align:center">แผน 12 ล้าน</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-label">วงเงิน/ปี</div>
+        <div class="vs-b">6 ล้าน</div>
+        <div class="vs-a">12 ล้าน</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-label">เบี้ยสุขภาพ</div>
+        <div class="vs-b">34,093</div>
+        <div class="vs-a">42,937</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-label">ประหยัดได้</div>
+        <div class="vs-b">-</div>
+        <div class="vs-a" style="color:#DC2626">+8,844/ปี</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-label">CI50</div>
+        <div class="vs-b">2 ล้าน ✅</div>
+        <div class="vs-a">ไม่มี</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="sec">
+    <div class="sec-title">⚠️ สิ่งที่ควรรู้</div>
+    <div class="note-box">
+      เบี้ยสุขภาพ <strong>ปรับตามกลุ่มอายุ</strong> ควรวางแผนงบระยะยาว · ตรวจสอบเงื่อนไข Pre-existing condition ก่อนรับประกัน · แผน 6 ล้านคุ้มค่ากว่าเพราะได้ CI 2 ล้านเพิ่มด้วย
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="v-icon">🏆</div>
+    <div class="v-title">คุ้มค่า<span>กว่าแผน 12 ล้าน!</span></div>
+    <div class="v-text">ในราคาที่ถูกกว่าแผน 12 ล้านถึง 8,844 บาท/ปี แต่ได้ CI 2 ล้านเพิ่มมา ทำให้แผนนี้ครอบคลุมมากกว่า เหมาะกับอายุ 37 ที่ต้องการความคุ้มครองรอบด้าน</div>
+    <div class="v-chips">
+      <div class="vc">⭐ Best Value Plan</div>
+      <div class="vc">🧑‍💼 Agent: 162165</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
