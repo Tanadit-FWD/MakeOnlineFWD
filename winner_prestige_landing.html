@@ -15,12 +15,10 @@
   --white:#FFFFFF;
   --gray:#F5F4F0;
   --gray-mid:#888;
-  --gold:#C9A84C;
 }
 body{font-family:'Sarabun',sans-serif;background:#fff;color:var(--black);overflow-x:hidden}
 h1,h2,h3,h4{font-family:'Prompt',sans-serif}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid rgba(0,0,0,0.08);padding:0 5%}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px}
@@ -28,7 +26,6 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .logo-text{font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;color:var(--black)}
 .logo-sub{font-size:11px;color:var(--gray-mid);display:block;margin-top:-2px}
 
-/* HERO */
 .hero{min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;align-items:center;padding-top:64px}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 80% 50%, #FF620020 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 10% 80%, #FF620015 0%, transparent 50%)}
 .hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,98,0,0.04) 0px,rgba(255,98,0,0.04) 1px,transparent 1px,transparent 80px);pointer-events:none}
@@ -44,13 +41,14 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .btn-primary:hover{background:var(--orange-dark)}
 .btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3);padding:14px 28px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
 .btn-secondary:hover{border-color:var(--orange);color:var(--orange)}
+.btn-line{background:#06C755;color:#fff;border:none;padding:14px 28px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-line:hover{background:#05a849}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .stat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 20px;transition:.2s}
 .stat-card:hover{border-color:rgba(255,98,0,0.4);background:rgba(255,98,0,0.06)}
 .stat-num{font-family:'Prompt',sans-serif;font-weight:800;font-size:36px;color:var(--orange);line-height:1}
 .stat-label{color:rgba(255,255,255,0.55);font-size:13px;margin-top:6px;line-height:1.5}
 
-/* WHY */
 .section{padding:80px 5%}
 .section-inner{max-width:1100px;margin:0 auto}
 .section-tag{display:inline-block;background:#FFF0E8;color:var(--orange);font-family:'Prompt',sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;padding:5px 14px;border-radius:50px;margin-bottom:16px;text-transform:uppercase}
@@ -63,12 +61,11 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .why-card h3{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--black)}
 .why-card p{color:var(--gray-mid);font-size:14px;line-height:1.8}
 
-/* PATH */
 .section-dark{background:var(--black);padding:80px 5%}
 .section-dark .section-tag{background:rgba(255,98,0,0.15);color:var(--orange-light)}
 .section-dark h2{color:#fff}
 .section-dark .section-desc{color:rgba(255,255,255,0.5)}
-.paths{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:0}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .path-card{border-radius:20px;padding:40px 36px;position:relative;overflow:hidden}
 .path-new{background:linear-gradient(135deg,#FF6200,#FF9D60);color:#fff}
 .path-switch{background:#fff;border:2px solid #EDECEA;color:var(--black)}
@@ -83,16 +80,14 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .path-new .path-list li::before{color:rgba(255,255,255,0.9)}
 .path-switch .path-list li::before{color:var(--orange)}
 
-/* BENEFITS */
 .benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .benefit-card{text-align:center;padding:32px 16px}
 .benefit-icon-wrap{width:64px;height:64px;background:linear-gradient(135deg,#FF6200,#FF9D60);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px}
 .benefit-card h4{font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px}
 .benefit-card p{color:var(--gray-mid);font-size:13px;line-height:1.7}
 
-/* TESTIMONIALS */
 .testimonials{background:#FFF8F5;padding:80px 5%}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .testi-card{background:#fff;border-radius:16px;padding:28px 24px;border:1px solid #EDECEA}
 .testi-quote{font-size:32px;color:var(--orange);font-family:serif;line-height:1;margin-bottom:14px}
 .testi-text{font-size:14px;line-height:1.9;color:#444;margin-bottom:20px;font-style:italic}
@@ -101,7 +96,6 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .testi-name{font-weight:700;font-size:14px}
 .testi-role{color:var(--gray-mid);font-size:12px}
 
-/* STEPS */
 .steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
 .steps-row::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-light));z-index:0}
 .step{text-align:center;position:relative;z-index:1;padding:0 12px}
@@ -114,19 +108,20 @@ nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);bac
 .cta-section{background:linear-gradient(135deg,#FF6200 0%,#CC4E00 100%);padding:80px 5%;text-align:center;position:relative;overflow:hidden}
 .cta-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 40%)}
 .cta-section h2{color:#fff;font-size:clamp(26px,3.5vw,44px);font-weight:800;margin-bottom:16px;position:relative}
-.cta-section p{color:rgba(255,255,255,0.8);font-size:17px;margin-bottom:40px;position:relative}
-.cta-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
-.cta-input{padding:14px 20px;border-radius:8px;border:none;font-family:'Sarabun',sans-serif;font-size:15px;width:260px;outline:none}
-.cta-submit{background:var(--black);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;white-space:nowrap}
-.cta-submit:hover{background:#222}
-.cta-line{color:rgba(255,255,255,0.6);font-size:12px;margin-top:16px;position:relative}
+.cta-section > .section-inner > p{color:rgba(255,255,255,0.85);font-size:17px;margin-bottom:40px;position:relative;line-height:1.8}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-cta-form{background:#fff;color:var(--orange);border:none;padding:16px 36px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-cta-form:hover{background:#f5f5f5;transform:translateY(-2px)}
+.btn-cta-line{background:#06C755;color:#fff;border:none;padding:16px 32px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.btn-cta-line:hover{background:#05a849;transform:translateY(-2px)}
+.cta-divider{color:rgba(255,255,255,0.5);font-size:14px;display:flex;align-items:center;gap:12px;position:relative}
+.cta-divider::before,.cta-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.2)}
+.line-icon{width:22px;height:22px;fill:#fff}
 
-/* FOOTER */
 footer{background:var(--black);padding:40px 5%;text-align:center}
 footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
 .footer-brand{color:var(--orange);font-family:'Prompt',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px}
 
-/* RESPONSIVE */
 @media(max-width:768px){
   .hero-content{grid-template-columns:1fr}
   .hero-stats{grid-template-columns:1fr 1fr}
@@ -136,8 +131,8 @@ footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
   .testi-grid{grid-template-columns:1fr}
   .steps-row{grid-template-columns:1fr 1fr;gap:24px}
   .steps-row::before{display:none}
+  .cta-buttons{flex-direction:column;align-items:center}
 }
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .hero-text-wrap{animation:fadeUp .8s ease both}
 .hero-stats{animation:fadeUp .8s .3s ease both}
@@ -152,7 +147,7 @@ footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
       <div class="logo-badge">FWD</div>
       <div>
         <span class="logo-text">Winner Prestige Team</span>
-        <span class="logo-sub">FWD Insurance | Agent Code 162165</span>
+        <span class="logo-sub">FWD Insurance</span>
       </div>
     </div>
     <a href="#join" class="btn-primary" style="font-size:13px;padding:10px 22px;text-decoration:none;border-radius:6px">สมัครเลย →</a>
@@ -169,7 +164,12 @@ footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
       <h1>เติบโตไปด้วยกัน<br>กับทีม <span>Winner<br>Prestige</span></h1>
       <p class="hero-sub">ไม่ว่าคุณจะเป็นมือใหม่ที่อยากเริ่มต้นอาชีพ<br>หรือตัวแทนมืออาชีพที่มองหาทีมที่ใช่<br>เราพร้อมพาคุณไปถึงเป้าหมาย</p>
       <div class="hero-ctas">
-        <a href="#join" class="btn-primary">สมัครเป็นทีม →</a>
+        <!-- ⚠️ แทนที่ YOUR_GOOGLE_FORM_LINK ด้วย link จาก Google Forms ของคุณ -->
+        <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-primary">สมัครเลย →</a>
+        <a href="https://line.me/R/ti/p/@349lbaul" target="_blank" class="btn-line">
+          <svg class="line-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          ทัก LINE
+        </a>
         <a href="#why" class="btn-secondary">ดูรายละเอียด</a>
       </div>
     </div>
@@ -376,22 +376,25 @@ footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
 
 <!-- CTA -->
 <section class="cta-section" id="join">
-  <div class="section-inner" style="max-width:700px;margin:0 auto">
+  <div class="section-inner" style="max-width:680px;margin:0 auto">
     <h2>พร้อมเปลี่ยนชีวิตแล้วหรือยัง?</h2>
-    <p>ฝากเบอร์ไว้ให้ทีมติดต่อกลับภายใน 24 ชั่วโมง<br>หรือทัก LINE มาหาเราได้โดยตรง</p>
-    <div class="cta-form">
-      <input class="cta-input" type="text" placeholder="ชื่อ - นามสกุล" />
-      <input class="cta-input" type="tel" placeholder="เบอร์โทรศัพท์" />
-      <button class="cta-submit" onclick="alert('ขอบคุณที่สนใจ! ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง')">ส่งข้อมูล →</button>
+    <p>เลือกช่องทางที่สะดวกสำหรับคุณ<br>ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง</p>
+    <div class="cta-buttons">
+      <!-- ⚠️ แทนที่ YOUR_GOOGLE_FORM_LINK ด้วย link จาก Google Forms ของคุณ -->
+      <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="btn-cta-form">📋 กรอกฟอร์มสมัคร</a>
+      <div class="cta-divider" style="color:rgba(255,255,255,0.4);font-size:13px">หรือ</div>
+      <a href="https://line.me/R/ti/p/@349lbaul" target="_blank" class="btn-cta-line">
+        <svg style="width:20px;height:20px;fill:#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        ทัก LINE @349lbaul
+      </a>
     </div>
-    <p class="cta-line">หรือทัก LINE ได้เลยที่ <strong style="color:#fff">@winner_prestige</strong> | ตัวแทนรหัส 162165</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Winner Prestige Team × FWD Insurance</div>
-  <p>Agent Code: 162165 | FWD Life Insurance Co., Ltd.<br>ได้รับใบอนุญาตประกันชีวิตประเภท ป. | คปภ. กำกับดูแล</p>
+  <p>FWD Life Insurance Co., Ltd. | ได้รับใบอนุญาตประกันชีวิตประเภท ป. | คปภ. กำกับดูแล</p>
 </footer>
 
 <script>
