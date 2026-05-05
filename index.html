@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ทำประกันOnline | FWD</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --o:#FF6200;--o2:#FF8534;--dark:#0F0F0F;--ch:#1E1E1E;
+  --bdr:rgba(255,255,255,0.08);--txt:#F0F0F0;--mut:rgba(255,255,255,0.45);
+  --wh:#FFF;--grn:#22C55E;--red:#EF4444;
+  --gold:#D4A017;--glt:rgba(212,160,23,0.12);
+  --teal:#0D9488;--tlt:rgba(13,148,136,0.12);
+  --purple:#7C3AED;--plt:rgba(124,58,237,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);font-family:'Sarabun',sans-serif;color:var(--txt);min-height:100vh;overflow-x:hidden;}
+
+.hdr{background:var(--ch);border-bottom:1px solid var(--bdr);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Prompt',sans-serif;font-weight:900;font-size:18px;color:var(--o);line-height:1;}
+.logo sub{display:block;font-size:8px;font-weight:400;letter-spacing:1.5px;color:var(--mut);margin-top:1px;}
+.hdr-r{font-size:10px;color:var(--mut);text-align:right;}
+
+/* 4 TABS */
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--ch);border-bottom:1px solid var(--bdr);}
+.tb{padding:10px 4px;font-family:'Prompt',sans-serif;font-weight:700;font-size:10px;border:none;background:transparent;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;text-align:center;line-height:1.4;}
+.tb.t-ci{color:var(--o);border-bottom-color:var(--o);}
+.tb.t-lg{color:var(--gold);border-bottom-color:var(--gold);}
+.tb.t-pc{color:var(--teal);border-bottom-color:var(--teal);}
+.tb.t-hp{color:var(--purple);border-bottom-color:var(--purple);}
+
+/* HERO */
+.hero{padding:20px 16px 16px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1A1A1A 0%,var(--dark) 100%);}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,98,0,.13) 0%,transparent 65%);pointer-events:none;transition:background .4s;}
+.hero.m-lg::before{background:radial-gradient(circle,rgba(212,160,23,.13) 0%,transparent 65%);}
+.hero.m-pc::before{background:radial-gradient(circle,rgba(13,148,136,.13) 0%,transparent 65%);}
+.hero.m-hp::before{background:radial-gradient(circle,rgba(124,58,237,.13) 0%,transparent 65%);}
+.eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--o);margin-bottom:4px;transition:color .3s;}
+.hero.m-lg .eyebrow{color:var(--gold);}
+.hero.m-pc .eyebrow{color:var(--teal);}
+.hero.m-hp .eyebrow{color:var(--purple);}
+.htitle{font-family:'Prompt',sans-serif;font-weight:800;font-size:21px;color:var(--wh);line-height:1.2;margin-bottom:4px;}
+.htitle em{color:var(--o);font-style:normal;transition:color .3s;}
+.hero.m-lg .htitle em{color:var(--gold);}
+.hero.m-pc .htitle em{color:var(--teal);}
+.hero.m-hp .htitle em{color:var(--purple);}
+.hdesc{font-size:12px;color:var(--mut);line-height:1.6;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.chip{background:rgba(255,98,0,.1);border:1px solid rgba(255,98,0,.25);border-radius:20px;padding:3px 9px;font-size:10px;color:var(--o2);transition:all .3s;}
+.hero.m-lg .chip{background:var(--glt);border-color:rgba(212,160,23,.25);color:var(--gold);}
+.hero.m-pc .chip{background:var(--tlt);border-color:rgba(13,148,136,.25);color:var(--teal);}
+.hero.m-hp .chip{background:var(--plt);border-color:rgba(124,58,237,.25);color:var(--purple);}
+
+/* FORM */
+.fsec{padding:16px;background:var(--ch);margin:10px;border-radius:14px;border:1px solid var(--bdr);}
+.ftitle{font-family:'Prompt',sans-serif;font-weight:700;font-size:13px;color:var(--wh);margin-bottom:12px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px;}
+.fg{display:flex;flex-direction:column;gap:4px;}
+.flbl{font-size:9px;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+.fin,.fsel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 12px;font-size:14px;font-family:'Sarabun',sans-serif;color:var(--wh);width:100%;transition:border-color .2s;-webkit-appearance:none;}
+.fin:focus,.fsel:focus{outline:none;border-color:var(--o);background:rgba(255,98,0,.06);}
+.fsel option{background:#1E1E1E;color:var(--wh);}
+
+.gen{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.gbtn{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:9px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--mut);cursor:pointer;transition:all .2s;text-align:center;}
+.g-ci{background:rgba(255,98,0,.12);border-color:var(--o);color:var(--o);font-weight:700;}
+.g-lg{background:var(--glt);border-color:var(--gold);color:var(--gold);font-weight:700;}
+.g-pc{background:var(--tlt);border-color:var(--teal);color:var(--teal);font-weight:700;}
+.g-hp{background:var(--plt);border-color:var(--purple);color:var(--purple);font-weight:700;}
+
+.amts{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
+.ab{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 9px;font-size:11px;font-family:'Sarabun',sans-serif;color:var(--mut);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.a-ci{background:rgba(255,98,0,.12);border-color:var(--o);color:var(--o);font-weight:700;}
+.a-lg{background:var(--glt);border-color:var(--gold);color:var(--gold);font-weight:700;}
+.a-pc{background:var(--tlt);border-color:var(--teal);color:var(--teal);font-weight:700;}
+.a-hp{background:var(--plt);border-color:var(--purple);color:var(--purple);font-weight:700;}
+
+.sbtn{width:100%;color:white;border:none;border-radius:11px;padding:13px;font-size:14px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;margin-top:12px;transition:transform .15s;letter-spacing:.5px;}
+.sbtn:active{transform:scale(.97);}
+.s-ci{background:var(--o);}
+.s-lg{background:linear-gradient(135deg,var(--gold),#9A7015);}
+.s-pc{background:linear-gradient(135deg,var(--teal),#065F56);}
+.s-hp{background:linear-gradient(135deg,var(--purple),#4C1D95);}
+
+.loading{display:none;text-align:center;padding:16px;color:var(--mut);font-size:12px;}
+.sp{width:22px;height:22px;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px;}
+.sp-ci{border:2px solid rgba(255,98,0,.2);border-top-color:var(--o);}
+.sp-lg{border:2px solid rgba(212,160,23,.2);border-top-color:var(--gold);}
+.sp-pc{border:2px solid rgba(13,148,136,.2);border-top-color:var(--teal);}
+.sp-hp{border:2px solid rgba(124,58,237,.2);border-top-color:var(--purple);}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.nores{display:none;padding:18px;text-align:center;background:var(--ch);border-radius:14px;border:1px solid var(--bdr);margin:0 10px 10px;}
+
+/* RESULT */
+.rsec{margin:0 10px 10px;display:none;}
+.rsec.show{display:block;}
+.rcard{background:var(--ch);border-radius:14px;border:1px solid var(--bdr);overflow:hidden;animation:su .4s ease-out;}
+@keyframes su{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+.rhdr{padding:14px 16px;position:relative;overflow:hidden;}
+.rhdr::after{content:'';position:absolute;top:-15px;right:-15px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.07);}
+.rh-ci{background:linear-gradient(135deg,var(--o),#C94400);}
+.rh-lg{background:linear-gradient(135deg,#C9952A,#8B6914);}
+.rh-pc{background:linear-gradient(135deg,#0D9488,#065F56);}
+.rh-hp{background:linear-gradient(135deg,#7C3AED,#4C1D95);}
+.rplan{font-family:'Prompt',sans-serif;font-weight:800;font-size:15px;color:white;line-height:1.2;margin-bottom:2px;position:relative;z-index:1;}
+.rfor{font-size:11px;color:rgba(255,255,255,.75);position:relative;z-index:1;}
+
+.pdsp{padding:14px 16px;border-bottom:1px solid var(--bdr);}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;}
+.plbl{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.pval{font-family:'Prompt',sans-serif;font-size:29px;font-weight:900;line-height:1;}
+.pval span{font-size:11px;font-weight:400;color:var(--mut);margin-left:2px;}
+.pv-ci{color:var(--o);}
+.pv-lg{color:var(--gold);}
+.pv-pc{color:var(--teal);}
+.pv-hp{color:var(--purple);}
+.pmo{font-size:11px;color:var(--mut);margin-top:2px;}
+.psub{font-family:'Prompt',sans-serif;font-size:15px;font-weight:800;color:var(--wh);}
+
+.dgrd{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr);border-bottom:1px solid var(--bdr);}
+.dc{background:var(--ch);padding:10px 14px;}
+.dl{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.dv{font-family:'Prompt',sans-serif;font-size:13px;font-weight:700;color:var(--wh);}
+.dv-ci{color:var(--o);}
+.dv-lg{color:var(--gold);}
+.dv-pc{color:var(--teal);}
+.dv-hp{color:var(--purple);}
+
+.covs{padding:12px 16px;border-bottom:1px solid var(--bdr);}
+.covt{font-size:9px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;}
+.covl{display:flex;flex-direction:column;gap:6px;}
+.cov{display:flex;gap:7px;align-items:flex-start;font-size:12px;color:var(--txt);line-height:1.5;}
+.ck{width:14px;height:14px;background:rgba(34,197,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;margin-top:2px;color:var(--grn);}
+
+.cta{padding:12px 16px;display:flex;flex-direction:column;gap:7px;}
+.cbtn{width:100%;border-radius:9px;padding:12px;font-size:13px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;border:none;transition:transform .15s;}
+.cbtn:active{transform:scale(.97);}
+.cb-ci{background:var(--o);color:white;}
+.cb-lg{background:linear-gradient(135deg,var(--gold),#9A7015);color:white;}
+.cb-pc{background:linear-gradient(135deg,var(--teal),#065F56);color:white;}
+.cb-hp{background:linear-gradient(135deg,var(--purple),#4C1D95);color:white;}
+.cb-sec{background:rgba(255,255,255,.06);color:var(--wh);border:1px solid var(--bdr)!important;}
+.cb-out-ci{background:transparent;color:var(--o);border:1.5px solid var(--o)!important;}
+.cb-out-lg{background:transparent;color:var(--gold);border:1.5px solid var(--gold)!important;}
+.cb-out-pc{background:transparent;color:var(--teal);border:1.5px solid var(--teal)!important;}
+.cb-out-hp{background:transparent;color:var(--purple);border:1.5px solid var(--purple)!important;}
+
+.qrsec{margin:0 10px 10px;background:var(--ch);border-radius:14px;border:1px solid var(--bdr);padding:18px 16px;text-align:center;}
+.qrt{font-family:'Prompt',sans-serif;font-weight:700;font-size:13px;color:var(--wh);margin-bottom:4px;}
+.qrs{font-size:11px;color:var(--mut);margin-bottom:14px;}
+.qrw{width:130px;height:130px;background:white;border-radius:11px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;}
+.qrw img{width:100%;height:100%;object-fit:contain;}
+.lbtn{display:inline-flex;align-items:center;gap:6px;background:#06C755;color:white;border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;text-decoration:none;}
+
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:flex-end;backdrop-filter:blur(4px);}
+.mov.show{display:flex;}
+.modal{background:#1A1A1A;border-radius:18px 18px 0 0;width:100%;max-height:90vh;overflow-y:auto;padding:0 0 40px;animation:sm .35s cubic-bezier(.32,.72,0,1);}
+@keyframes sm{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.mhdl{width:34px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:12px auto 0;}
+.mhd{padding:14px 16px 12px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;}
+.mtitle{font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;color:var(--wh);}
+.mclose{background:rgba(255,255,255,.08);border:none;width:26px;height:26px;border-radius:50%;font-size:14px;color:var(--mut);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mbody{padding:14px 16px;}
+.mg{margin-bottom:11px;}
+.ml{font-size:9px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:5px;display:block;}
+.mi,.ms,.mta{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 12px;font-size:14px;font-family:'Sarabun',sans-serif;color:var(--wh);}
+.mta{min-height:65px;resize:none;}
+.mi:focus,.ms:focus,.mta:focus{outline:none;border-color:var(--o);}
+.ms option{background:#1A1A1A;}
+.msub{width:100%;background:var(--o);color:white;border:none;border-radius:11px;padding:13px;font-size:14px;font-family:'Prompt',sans-serif;font-weight:700;cursor:pointer;margin-top:5px;}
+.ss{text-align:center;padding:30px 16px;display:none;}
+.si{width:52px;height:52px;background:rgba(34,197,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 11px;}
+.st{font-family:'Prompt',sans-serif;font-weight:700;font-size:17px;color:var(--wh);margin-bottom:5px;}
+.sd{font-size:12px;color:var(--mut);line-height:1.6;}
+
+.errtxt{font-size:10px;color:var(--red);margin-top:2px;display:none;}
+input.err,select.err{border-color:var(--red)!important;}
+
+.footer{padding:18px 16px 40px;text-align:center;border-top:1px solid var(--bdr);margin-top:5px;}
+.flogo{font-family:'Prompt',sans-serif;font-weight:900;font-size:15px;color:var(--o);margin-bottom:3px;}
+.ftxt{font-size:10px;color:var(--mut);line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div><div class="logo">FWD<sub>ทำประกันOnline</sub></div></div>
+  <div class="hdr-r">Agent<br><strong style="color:var(--o)">162165</strong></div>
+</div>
+
+<div class="tabs">
+  <button class="tb t-pc" id="tabPC" onclick="sw('pc')">🏥 พรีเชียส<br>แคร์</button>
+  <button class="tb" id="tabCI" onclick="sw('ci')">💊 CI<br>โรคร้าย</button>
+  <button class="tb" id="tabLG" onclick="sw('lg')">🏆 แผน<br>มรดก</button>
+  <button class="tb" id="tabHP" onclick="sw('hp')">💎 Heritage<br>Plus</button>
+</div>
+
+<div class="hero" id="heroEl">
+  <div class="eyebrow">เช็คเบี้ยประกัน</div>
+  <div class="htitle" id="htitle">โรคร้ายแรง<br><em>CI Re-Claim Re-Care</em></div>
+  <div class="hdesc" id="hdesc">กรอกข้อมูลเพื่อดูเบี้ยประกันที่เหมาะกับคุณ</div>
+  <div class="chips" id="hchips">
+    <div class="chip">✅ เบี้ยจริง</div>
+    <div class="chip">⚡ ทันที</div>
+    <div class="chip">🔒 ปลอดภัย</div>
+  </div>
+</div>
+
+<div class="fsec">
+  <div class="ftitle" id="ftitle">🔍 ค้นหาเบี้ยประกัน CI</div>
+  <div class="frow">
+    <div class="fg">
+      <label class="flbl">อายุ (ปี)</label>
+      <input type="number" id="inAge" class="fin" placeholder="เช่น 35" min="0" max="75">
+      <div class="errtxt" id="ageErr">กรุณากรอกอายุให้ถูกต้อง</div>
+    </div>
+    <div class="fg">
+      <label class="flbl">เพศ</label>
+      <div class="gen">
+        <button class="gbtn g-ci" id="btnM" onclick="setG('m')">👨 ชาย</button>
+        <button class="gbtn" id="btnF" onclick="setG('f')">👩 หญิง</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="secCI" class="fg" style="margin-bottom:11px">
+    <label class="flbl">ทุน CI Re-Claim</label>
+    <div class="amts" id="ciA">
+      <button class="ab" onclick="pick('ci',500000,this)">500K</button>
+      <button class="ab" onclick="pick('ci',1000000,this)">1M</button>
+      <button class="ab a-ci" onclick="pick('ci',3000000,this)">3M</button>
+      <button class="ab" onclick="pick('ci',5000000,this)">5M</button>
+      <button class="ab" onclick="pick('ci',6000000,this)">6M</button>
+      <button class="ab" onclick="pick('ci',7000000,this)">7M</button>
+      <button class="ab" onclick="pick('ci',8000000,this)">8M</button>
+      <button class="ab" onclick="pick('ci',9000000,this)">9M</button>
+      <button class="ab" onclick="pick('ci',10000000,this)">10M</button>
+    </div>
+  </div>
+
+  <div id="secLG" class="fg" style="margin-bottom:11px;display:none">
+    <label class="flbl">ทุนประกันมรดก</label>
+    <div class="amts" id="lgA">
+      <button class="ab" onclick="pick('lg',1000000,this)">1 ล้าน</button>
+      <button class="ab a-lg" onclick="pick('lg',2000000,this)">2 ล้าน</button>
+      <button class="ab" onclick="pick('lg',3000000,this)">3 ล้าน</button>
+      <button class="ab" onclick="pick('lg',5000000,this)">5 ล้าน</button>
+    </div>
+  </div>
+
+  <div id="secPC" class="fg" style="margin-bottom:11px;display:none">
+    <label class="flbl">วงเงินเหมาจ่าย/ปี</label>
+    <div class="amts" id="pcA">
+      <button class="ab" onclick="pick('pc',1000000,this)">1 ล้าน</button>
+      <button class="ab a-pc" onclick="pick('pc',3000000,this)">3 ล้าน</button>
+      <button class="ab" onclick="pick('pc',6000000,this)">6 ล้าน</button>
+      <button class="ab" onclick="pick('pc',12000000,this)">12 ล้าน</button>
+    </div>
+  </div>
+
+  <div id="secHP" class="fg" style="margin-bottom:11px;display:none">
+    <label class="flbl">ทุนประกันชีวิต (Heritage Plus)</label>
+    <div class="amts" id="hpA">
+      <button class="ab" onclick="pick('hp',10000000,this)">10 ล้าน</button>
+      <button class="ab a-hp" onclick="pick('hp',20000000,this)">20 ล้าน</button>
+      <button class="ab" onclick="pick('hp',30000000,this)">30 ล้าน</button>
+      <button class="ab" onclick="pick('hp',50000000,this)">50 ล้าน</button>
+      <button class="ab" onclick="pick('hp',100000000,this)">100 ล้าน</button>
+    </div>
+  </div>
+
+  <button class="sbtn s-ci" id="sbtn" onclick="doSearch()">🔍 ดูเบี้ยประกัน</button>
+</div>
+
+<div class="loading" id="ldEl"><div class="sp sp-ci" id="spEl"></div>กำลังค้นหาข้อมูล...</div>
+<div class="nores" id="nrEl"><div style="font-size:26px;margin-bottom:7px">😔</div><div style="font-size:12px;color:var(--mut);line-height:1.6">ไม่พบข้อมูลสำหรับเงื่อนไขนี้<br>กรุณาติดต่อเอเจนต์โดยตรงครับ</div></div>
+
+<div class="rsec" id="rSec">
+  <div class="rcard">
+    <div class="rhdr rh-ci" id="rHdr">
+      <div class="rplan" id="rPlan">-</div>
+      <div class="rfor" id="rFor">-</div>
+    </div>
+    <div class="pdsp">
+      <div class="prow">
+        <div>
+          <div class="plbl">เบี้ยประกันรายปี</div>
+          <div class="pval pv-ci" id="rPrem">-<span>บาท/ปี</span></div>
+          <div class="pmo" id="rMo">-</div>
+        </div>
+        <div style="text-align:right">
+          <div class="plbl" id="rSumLbl">ทุน</div>
+          <div class="psub" id="rSum">-</div>
+        </div>
+      </div>
+    </div>
+    <div class="dgrd">
+      <div class="dc"><div class="dl" id="rL1L">ทุนประกัน</div><div class="dv" id="rL1">-</div></div>
+      <div class="dc"><div class="dl" id="rL2L">รายละเอียด</div><div class="dv dv-ci" id="rL2">-</div></div>
+      <div class="dc"><div class="dl">คุ้มครองถึงอายุ</div><div class="dv" id="rL3">-</div></div>
+      <div class="dc"><div class="dl">รับประกัน</div><div class="dv" id="rL4">-</div></div>
+    </div>
+    <div class="covs"><div class="covt">ความคุ้มครอง</div><div class="covl" id="covL"></div></div>
+    <div class="cta">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <button class="cbtn cb-ci" id="ctaL" onclick="window.open('https://lin.ee/Wb0k43i','_blank')">💬 สนใจ</button>
+        <button class="cbtn" id="ctaShare" onclick="shareToLine()" style="background:linear-gradient(135deg,#06C755,#04a344);color:white;border:none;">📤 แชร์เบี้ย</button>
+      </div>
+      <button class="cbtn cb-out-ci" id="ctaA" onclick="openAppt()">📅 นัดหมายปรึกษาฟรี</button>
+      <button class="cbtn cb-sec" onclick="showQR()">📱 QR Code ติดต่อ</button>
+    </div>
+  </div>
+</div>
+
+<div class="qrsec" id="qrEl" style="display:none">
+  <div class="qrt">📱 ติดต่อเอเจนต์ผ่าน Line</div>
+  <div class="qrs">สแกน QR หรือกดปุ่มด้านล่าง</div>
+  <div class="qrw"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://lin.ee/Wb0k43i&color=0F0F0F&bgcolor=FFFFFF" alt="QR"></div>
+  <a href="https://lin.ee/Wb0k43i" target="_blank" class="lbtn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    เพิ่มเพื่อนใน Line
+  </a>
+</div>
+
+<div class="footer">
+  <div class="flogo">FWD ทำประกันOnline</div>
+  <div class="ftxt">ทนาดิต · Agent Code 162165<br>เบี้ยที่แสดงเป็นเบี้ยรายปี อ้างอิงจาก FWD Insurance</div>
+</div>
+
+<div class="mov" id="apptM" onclick="closeOut(event)">
+  <div class="modal">
+    <div class="mhdl"></div>
+    <div class="mhd">
+      <div class="mtitle">📅 นัดหมายปรึกษาฟรี</div>
+      <button class="mclose" onclick="closeAppt()">✕</button>
+    </div>
+    <div class="mbody" id="mbd">
+      <div class="mg"><label class="ml">ชื่อ - นามสกุล</label><input type="text" class="mi" id="aNm" placeholder="กรอกชื่อของคุณ"></div>
+      <div class="mg"><label class="ml">เบอร์โทรศัพท์</label><input type="tel" class="mi" id="aPh" placeholder="08X-XXX-XXXX"></div>
+      <div class="mg"><label class="ml">Line ID</label><input type="text" class="mi" id="aLn" placeholder="@line_id"></div>
+      <div class="mg"><label class="ml">วันที่นัด</label><input type="date" class="mi" id="aDt"></div>
+      <div class="mg"><label class="ml">ช่วงเวลา</label>
+        <select class="ms" id="aTm">
+          <option>-- เลือกช่วงเวลา --</option>
+          <option>09:00-11:00</option><option>11:00-13:00</option>
+          <option>13:00-15:00</option><option>15:00-17:00</option>
+          <option>17:00-19:00</option><option>19:00-21:00</option>
+        </select>
+      </div>
+      <div class="mg"><label class="ml">หมายเหตุ</label><textarea class="mta" id="aNt" placeholder="เช่น สนใจ Heritage Plus 20M ชาย 40 ปี..."></textarea></div>
+      <button class="msub" onclick="subAppt()">✅ ส่งคำขอนัดหมาย</button>
+    </div>
+    <div class="ss" id="ssEl">
+      <div class="si">✅</div>
+      <div class="st">ส่งคำขอเรียบร้อย!</div>
+      <div class="sd">เอเจนต์จะติดต่อกลับภายใน 24 ชั่วโมงครับ</div>
+      <br><a href="https://lin.ee/Wb0k43i" target="_blank" class="lbtn" style="margin-top:8px;display:inline-flex">💬 เพิ่มเพื่อน Line</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════
+// DATA
+// ════════════════════════════════════
+
+// CI (อายุ 1-70)
+const CI={500000:{1:{m:3488,f:3102},2:{m:3194,f:2989},5:{m:2859,f:2611},10:{m:2524,f:2422},15:{m:3210,f:2576},18:{m:3379,f:2650},19:{m:3452,f:2692},20:{m:3486,f:2720},21:{m:3632,f:2756},22:{m:3721,f:2797},23:{m:3802,f:2900},24:{m:3929,f:3041},25:{m:3989,f:3143},26:{m:4072,f:3217},27:{m:4146,f:3413},28:{m:4229,f:3636},29:{m:4360,f:3772},30:{m:4465,f:3860},31:{m:4611,f:3954},32:{m:4883,f:4258},33:{m:5021,f:4397},34:{m:5140,f:4706},35:{m:5228,f:4784},36:{m:5365,f:4879},37:{m:5563,f:5007},38:{m:6031,f:5356},39:{m:6550,f:5702},40:{m:7129,f:6039},41:{m:8175,f:6336},42:{m:8898,f:6762},43:{m:9740,f:7250},44:{m:10703,f:7808},45:{m:11746,f:8427},46:{m:12872,f:9219},47:{m:14024,f:9936},48:{m:15201,f:10687},49:{m:16425,f:11457},50:{m:17773,f:12176},51:{m:19296,f:14459},52:{m:21019,f:15433},53:{m:23017,f:16944},54:{m:25322,f:17934},55:{m:27899,f:19005},56:{m:30794,f:20360},57:{m:33991,f:22110},58:{m:37369,f:23856},59:{m:41270,f:26011},60:{m:45970,f:28841},61:{m:51181,f:31923},62:{m:56825,f:34358},63:{m:61106,f:36773},64:{m:68478,f:39311},65:{m:76116,f:44315},66:{m:79105,f:46386},67:{m:85894,f:51361},68:{m:91265,f:56987},69:{m:99405,f:63274},70:{m:109100,f:67404}},1000000:{1:{m:5963,f:5297},10:{m:3849,f:3797},15:{m:5080,f:4001},18:{m:5324,f:4075},19:{m:5437,f:4132},20:{m:5471,f:4160},21:{m:5727,f:4201},22:{m:5866,f:4252},23:{m:5987,f:4425},24:{m:6199,f:4671},25:{m:6274,f:4838},26:{m:6392,f:4947},27:{m:6491,f:5298},28:{m:6604,f:5701},29:{m:6810,f:5927},30:{m:6960,f:6055},31:{m:7191,f:6194},32:{m:7668,f:6748},33:{m:7876,f:6972},34:{m:8040,f:7531},35:{m:8138,f:7624},36:{m:8330,f:7749},37:{m:8638,f:7937},38:{m:9481,f:8561},39:{m:10420,f:9177},40:{m:11474,f:9769},41:{m:13455,f:10276},42:{m:14783,f:11037},43:{m:16340,f:11915},44:{m:18133,f:12928},45:{m:20076,f:14057},46:{m:22177,f:15524},47:{m:24319,f:16836},48:{m:26501,f:18207},49:{m:28765,f:19607},50:{m:31263,f:20896},51:{m:34096,f:25304},52:{m:37314,f:27083},53:{m:41062,f:29924},54:{m:45407,f:31709},55:{m:50274,f:33640},56:{m:55754,f:36120},57:{m:61811,f:39370},58:{m:68204,f:42591},59:{m:75610,f:46606},60:{m:84580,f:51946},61:{m:94536,f:57763},62:{m:105320,f:62258},63:{m:113336,f:66678},64:{m:127488,f:71306},65:{m:142121,f:80825},66:{m:147420,f:84441},67:{m:160254,f:93811},68:{m:170195,f:104432},69:{m:185615,f:116319},70:{m:204085,f:123834}},3000000:{1:{m:15863,f:14077},10:{m:9149,f:9297},15:{m:12560,f:9701},18:{m:13104,f:9775},19:{m:13377,f:9892},20:{m:13411,f:9920},21:{m:14107,f:9981},22:{m:14446,f:10072},23:{m:14727,f:10525},24:{m:15279,f:11191},25:{m:15414,f:11618},26:{m:15672,f:11867},27:{m:15871,f:12838},28:{m:16104,f:13961},29:{m:16610,f:14547},30:{m:16940,f:14835},31:{m:17511,f:15154},32:{m:18808,f:16708},33:{m:19296,f:17272},34:{m:19640,f:18831},35:{m:19778,f:18984},36:{m:20190,f:19229},37:{m:20938,f:19657},38:{m:23281,f:21381},39:{m:25900,f:23077},40:{m:28854,f:24689},41:{m:34575,f:26036},42:{m:38323,f:28137},43:{m:42740,f:30575},44:{m:47853,f:33408},45:{m:53396,f:36577},46:{m:59397,f:40744},47:{m:65499,f:44436},48:{m:71701,f:48287},49:{m:78125,f:52207},50:{m:85223,f:55776},51:{m:93296,f:68684},52:{m:102494,f:73683},53:{m:113242,f:81844},54:{m:125747,f:86809},55:{m:139774,f:92180},56:{m:155594,f:99160},57:{m:173091,f:108410},58:{m:191544,f:117531},59:{m:212970,f:128986},60:{m:239020,f:144366},61:{m:267956,f:161123},62:{m:299300,f:173858},63:{m:322256,f:186298},64:{m:363528,f:199286},65:{m:406141,f:226865},66:{m:420680,f:236661},67:{m:457694,f:263611},68:{m:485915,f:294212},69:{m:530455,f:328499},70:{m:584025,f:349554}},5000000:{20:{m:21351,f:15680},21:{m:22487,f:15761},22:{m:23026,f:15892},23:{m:23467,f:16625},24:{m:24359,f:17711},25:{m:24554,f:18398},26:{m:24952,f:18787},27:{m:25251,f:20378},28:{m:25604,f:22221},29:{m:26410,f:23167},30:{m:26920,f:23615},31:{m:27831,f:24114},32:{m:29948,f:26668},33:{m:30716,f:27572},34:{m:31240,f:30131},35:{m:31418,f:30344},36:{m:32050,f:30709},37:{m:33238,f:31377},38:{m:37081,f:34201},39:{m:41380,f:36977},40:{m:46234,f:39609},41:{m:55695,f:41796},42:{m:61863,f:45237},43:{m:69140,f:49235},44:{m:77573,f:53888},45:{m:86716,f:59097},46:{m:96617,f:65964},47:{m:106679,f:72036},48:{m:116901,f:78367},49:{m:127485,f:84807},50:{m:139183,f:90656},51:{m:152496,f:112064},52:{m:167674,f:120283},53:{m:185422,f:133764},54:{m:206087,f:141909},55:{m:229274,f:150720},56:{m:255434,f:162200},57:{m:284371,f:177450},58:{m:314884,f:192471},59:{m:350330,f:211366},60:{m:393460,f:236786},61:{m:441376,f:264483},62:{m:493280,f:285458},63:{m:531176,f:305918},64:{m:599568,f:327266},65:{m:670161,f:372905},66:{m:693940,f:388881},67:{m:755134,f:433411},68:{m:801635,f:483992},69:{m:875295,f:540679},70:{m:963965,f:575274}},6000000:{20:{m:25321,f:18560},25:{m:29124,f:21788},30:{m:31910,f:28005},35:{m:37238,f:36024},36:{m:37980,f:36449},37:{m:39388,f:37237},38:{m:43981,f:40611},39:{m:49120,f:43927},40:{m:54924,f:47069},41:{m:66255,f:49676},42:{m:73633,f:53787},43:{m:82340,f:58565},44:{m:92433,f:64128},45:{m:103376,f:70357},46:{m:115227,f:78574},47:{m:127269,f:85836},48:{m:139501,f:93407},49:{m:152165,f:101107},50:{m:166163,f:108096},51:{m:182096,f:133754},52:{m:200264,f:143583},53:{m:221512,f:159724},54:{m:246257,f:169459},55:{m:274024,f:179990},56:{m:305354,f:193720},57:{m:340011,f:211970},58:{m:376554,f:229941},59:{m:419010,f:252556},60:{m:470680,f:282996},61:{m:528086,f:316163},62:{m:590270,f:341258},63:{m:635636,f:365728},64:{m:717588,f:391256},65:{m:802171,f:445925},66:{m:830570,f:464991},67:{m:903854,f:518311},68:{m:959495,f:578882},69:{m:1047715,f:646769},70:{m:1153935,f:688134}},7000000:{20:{m:29291,f:21440},30:{m:36900,f:32395},35:{m:43058,f:41704},36:{m:43910,f:42189},37:{m:45538,f:43097},38:{m:50881,f:47021},39:{m:56860,f:50877},40:{m:63614,f:54529},41:{m:76815,f:57556},42:{m:85403,f:62337},43:{m:95540,f:67895},44:{m:107293,f:74368},45:{m:120036,f:81617},46:{m:133837,f:91184},47:{m:147859,f:99636},48:{m:162101,f:108447},49:{m:176845,f:117407},50:{m:193143,f:125536},51:{m:211696,f:155444},52:{m:232854,f:166883},53:{m:257602,f:185684},54:{m:286427,f:197009},55:{m:318774,f:209260},56:{m:355274,f:225240},57:{m:395651,f:246490},58:{m:438224,f:267411},59:{m:487690,f:293746},60:{m:547900,f:329206},61:{m:614796,f:367843},62:{m:687260,f:397058},63:{m:740096,f:425538},64:{m:835608,f:455246},65:{m:934181,f:518945},66:{m:967200,f:541101},67:{m:1052574,f:603211},68:{m:1117355,f:673772},69:{m:1220135,f:752859},70:{m:1343905,f:800994}},8000000:{20:{m:33261,f:24320},30:{m:41890,f:36785},35:{m:48878,f:47384},36:{m:49840,f:47929},37:{m:51688,f:48957},38:{m:57781,f:53431},39:{m:64600,f:57827},40:{m:72304,f:61989},41:{m:87375,f:65436},42:{m:97173,f:70887},43:{m:108740,f:77225},44:{m:122153,f:84608},45:{m:136696,f:92877},46:{m:152447,f:103794},47:{m:168449,f:113436},48:{m:184701,f:123487},49:{m:201525,f:133707},50:{m:220123,f:142976},51:{m:241296,f:177134},52:{m:265444,f:190183},53:{m:293692,f:211644},54:{m:326597,f:224559},55:{m:363524,f:238530},56:{m:405194,f:256760},57:{m:451291,f:281010},58:{m:499894,f:304881},59:{m:556370,f:334936},60:{m:625120,f:375416},61:{m:701506,f:419523},62:{m:784250,f:452858},63:{m:844556,f:485348},64:{m:953628,f:519236},65:{m:1066191,f:591965},66:{m:1103830,f:617211},67:{m:1201294,f:688111},68:{m:1275215,f:768662},69:{m:1392555,f:858949},70:{m:1533875,f:913854}},9000000:{20:{m:37231,f:27200},30:{m:46880,f:41175},35:{m:54698,f:53064},36:{m:55770,f:53669},37:{m:57838,f:54817},38:{m:64681,f:59841},39:{m:72340,f:64777},40:{m:80994,f:69449},41:{m:97935,f:73316},42:{m:108943,f:79437},43:{m:121940,f:86555},44:{m:137013,f:94848},45:{m:153356,f:104137},46:{m:171057,f:116404},47:{m:189039,f:127236},48:{m:207301,f:138527},49:{m:226205,f:150007},50:{m:247103,f:160416},51:{m:270896,f:198824},52:{m:298034,f:213483},53:{m:329782,f:237604},54:{m:366767,f:252109},55:{m:408274,f:267800},56:{m:455114,f:288280},57:{m:506931,f:315530},58:{m:561564,f:342351},59:{m:625050,f:376126},60:{m:702340,f:421626},61:{m:788216,f:471203},62:{m:881240,f:508658},63:{m:949016,f:545158},64:{m:1071648,f:583226},65:{m:1198201,f:664985},66:{m:1240460,f:693321},67:{m:1350014,f:773011},68:{m:1433075,f:863552},69:{m:1564975,f:965039},70:{m:1723845,f:1026714}},10000000:{20:{m:41201,f:30080},30:{m:51870,f:45565},35:{m:60518,f:58744},36:{m:61700,f:59409},37:{m:63988,f:60677},38:{m:71581,f:66251},39:{m:80080,f:71727},40:{m:89684,f:76909},41:{m:108495,f:81196},42:{m:120713,f:87987},43:{m:135140,f:95885},44:{m:151873,f:105088},45:{m:170016,f:115397},46:{m:189667,f:129014},47:{m:209629,f:141036},48:{m:229901,f:153567},49:{m:250885,f:166307},50:{m:274083,f:177856},51:{m:300496,f:220514},52:{m:330624,f:236783},53:{m:365872,f:263564},54:{m:406937,f:279659},55:{m:453024,f:297070},56:{m:505034,f:319800},57:{m:562571,f:350050},58:{m:623234,f:379821},59:{m:693730,f:417316},60:{m:779560,f:467836},61:{m:874926,f:522883},62:{m:978230,f:564458},63:{m:1053476,f:604968},64:{m:1189668,f:647216},65:{m:1330211,f:738005},66:{m:1377090,f:769431},67:{m:1498734,f:857911},68:{m:1590935,f:958442},69:{m:1737395,f:1071129},70:{m:1913815,f:1139574}}};
+const CI_MAX={500000:'5.5M',1000000:'11M',2000000:'22M',3000000:'33M',5000000:'55M',6000000:'66M',7000000:'77M',8000000:'88M',9000000:'99M',10000000:'110M'};
+
+// LEGACY
+const LEG={1000000:{m:{20:5244,21:5412,22:5536,23:5696,24:5744,25:5892,26:6036,27:6200,28:6376,29:6532,30:6724,31:6920,32:7168,33:7428,34:7740,35:8048,36:8516,37:8860,38:9192,39:9568,40:9984,41:10472,42:11036,43:11656,44:12316,45:12932,46:13696,47:14436,48:15176,49:15948,50:16768,51:17452,52:18484,53:19520,54:20872,55:22132,56:23884,57:25804,58:27720,59:29584,60:32072,61:35136,62:38304,63:41672,64:45516,65:51100},f:{20:3844,21:3924,22:4036,23:4156,24:4292,25:4484,26:4620,27:4768,28:4956,29:5136,30:5360,31:5588,32:5896,33:6204,34:6584,35:6940,36:7380,37:7768,38:8132,39:8488,40:8864,41:9180,42:9580,43:10104,44:10608,45:11152,46:11760,47:12404,48:12992,49:13628,50:14204,51:14812,52:15384,53:15800,54:16368,55:16936,56:17780,57:18796,58:19816,59:21000,60:22580,61:24476,62:26596,63:28464,64:30544,65:34152}},2000000:{m:{20:7124,25:8032,30:9204,35:11508,36:12286,37:12910,38:13532,39:14228,40:14964,41:15862,42:16856,43:17976,44:16568,45:20422,46:21866,47:23256,48:24646,49:26108,50:27678,51:28942,52:30864,53:32920,54:35412,55:37972,56:41364,57:45134,58:49020,59:52814,60:57862,61:64206,62:70634,63:77662,64:85636,65:97500},f:{20:4924,25:5814,30:7210,35:10040,36:10830,37:11528,38:12172,39:12798,40:13444,41:13980,42:14730,43:15634,44:16568,45:17592,46:18760,47:19934,48:21032,49:22188,50:23234,51:24352,52:25264,53:25950,54:26778,55:27656,56:29130,57:31016,58:32886,59:35150,60:38280,61:42146,62:46366,63:50144,64:54274,65:61842}},3000000:{m:{20:9004,25:10172,30:11684,35:14968,36:16056,37:16960,38:17872,39:18888,40:19944,41:21252,42:22676,43:24296,44:26056,45:27912,46:30036,47:32076,48:34116,49:36268,50:38588,51:40432,52:43244,53:46320,54:49952,55:53812,56:58844,57:64464,58:70320,59:76044,60:83652,61:93276,62:102964,63:113652,64:125756,65:143900},f:{20:6004,25:7144,30:9060,35:13140,36:14280,37:15288,38:16212,39:17108,40:18024,41:18780,42:19880,43:21164,44:22528,45:24032,46:25760,47:27464,48:29072,49:30748,50:32264,51:33892,52:33892,53:35144,54:37188,55:38376,56:40480,57:43236,58:45956,59:49300,60:53980,61:59816,62:66136,63:71824,64:71824,65:89564}},5000000:{m:{20:12764,25:14452,30:16644,35:21888,36:23596,37:25060,38:26552,39:28208,40:29904,41:32032,42:34316,43:36936,44:39796,45:42892,46:46376,47:49716,48:53056,49:56588,50:60408,51:63412,52:68004,53:73120,54:79032,55:85492,56:93804,57:103124,58:112920,59:122504,60:135232,61:151416,62:167624,63:185632,64:205996,65:236700},f:{20:8164,25:9804,30:12760,35:19340,36:21180,37:22808,38:24292,39:25728,40:27184,41:28380,42:30180,43:32224,44:34448,45:36912,46:39760,47:42524,48:45152,49:47868,50:50324,51:52972,52:54904,53:56400,54:58008,55:59816,56:63180,57:67676,58:72096,59:77600,60:85380,61:95156,62:105676,63:115184,64:125464,65:144912}}};
+
+// PRECIOUS CARE
+const PC={1000000:{m:{20:19398,21:18834,22:18271,23:18538,24:18805,25:19073,26:19343,27:19613,28:19774,29:19936,30:20101,31:20265,32:20432,33:20905,34:21379,35:21856,36:22334,37:22814,38:22971,39:23128,40:23289,41:23451,42:23617,43:24301,44:24989,45:25679,46:26373,47:27071,48:27545,49:28024,50:28507,51:28996,52:29490,53:31683,54:33882,55:36087,56:38302,57:40526,58:42311,59:44107,60:45914,61:47734,62:49568,63:54849,64:60147,65:65463,66:70797,67:76153,68:85538,69:94947,70:104384,71:113848,72:123343,73:131529,74:139748,75:148002},f:{20:19273,21:18705,22:18139,23:18402,24:18665,25:18930,26:19196,27:19462,28:19618,29:19775,30:19934,31:20093,32:20254,33:20720,34:21189,35:21659,36:22130,37:22602,38:22751,39:22900,40:23052,41:23206,42:23362,43:24036,44:24713,45:25392,46:26074,47:26759,48:27220,49:27686,50:28155,51:28627,52:29106,53:31281,54:33461,55:35648,56:37841,57:40042,58:41803,59:43574,60:45353,61:47143,62:48945,63:54193,64:59456,65:64734,66:70030,67:75344,68:84685,69:94047,70:103433,71:112844,72:122282,73:130407,74:138562,75:146750}},3000000:{m:{20:26884,25:27100,30:29134,35:30405,36:30586,37:30769,38:30916,39:31063,40:31214,41:31366,42:31522,43:32923,44:34328,45:35735,46:37146,47:38561,48:39759,49:40960,50:42167,51:43380,52:44596,53:45986,54:47381,55:48782,56:50193,57:51613,58:53438,59:55274,60:57121,61:58981,62:60855,63:65617,64:70395,65:75192,66:80006,67:84843,68:95326,69:105835,70:116370,71:126934,72:137527,73:146655,74:155817,75:165013},f:{20:26759,25:26957,30:28967,35:30208,36:30382,37:30557,38:30696,39:30835,40:30977,41:31121,42:31267,43:32658,44:34052,45:35448,46:36847,47:38249,48:39434,49:40622,50:41815,51:43011,52:44212,53:45584,54:46960,55:48343,56:49732,57:51129,58:52930,59:54741,60:56560,61:58390,62:60232,63:64961,64:69704,65:74463,66:79239,67:84034,68:94473,69:104935,70:115419,71:125930,72:136466,73:145533,74:154631,75:163761}},6000000:{m:{20:31122,25:31211,30:33268,35:34875,36:35140,37:35407,38:35547,39:35688,40:35832,41:35979,42:36128,43:37529,44:38935,45:40342,46:41754,47:43169,48:44504,49:45843,50:47186,51:48536,52:49890,53:51474,54:53065,55:54662,56:56268,57:57883,58:59920,59:61967,60:64026,61:66097,62:68183,63:73557,64:78948,65:84358,66:89785,67:95234,68:107017,69:118825,70:130661,71:142524,72:154417,73:164797,74:175210,75:185658},f:{20:30997,25:31068,30:33101,35:34678,36:34936,37:35195,38:35327,39:35460,40:35595,41:35734,42:35873,43:37264,44:38659,45:40055,46:41455,47:42857,48:44179,49:45505,50:46834,51:48167,52:49506,53:51072,54:52644,55:54223,56:55807,57:57399,58:59412,59:61434,60:63465,61:65506,62:67560,63:72901,64:78257,65:83629,66:89018,67:94425,68:106164,69:117925,70:129710,71:141520,72:153356,73:163675,74:174024,75:184406}},12000000:{m:{20:37381,25:37300,30:38860,35:41784,36:42519,37:43257,38:44294,39:45332,40:46373,41:47416,42:48462,43:49239,44:50020,45:50803,46:51590,47:52382,48:54560,49:56743,50:58931,51:61125,52:63322,53:65216,54:67116,55:69022,56:70938,57:72861,58:75369,59:77887,60:80416,61:82959,62:85515,63:93180,64:100862,65:108562,66:116280,67:124020,68:139403,69:154812,70:170247,71:185711,72:201204,73:214611,74:228050,75:241525},f:{20:37256,25:37157,30:38693,35:41587,36:42315,37:43045,38:44074,39:45104,40:46136,41:47171,42:48207,43:48974,44:49744,45:50516,46:51291,47:52070,48:54235,49:56405,50:58579,51:60756,52:62938,53:64814,54:66695,55:68583,56:70477,57:72377,58:74861,59:77354,60:79855,61:82368,62:84892,63:92524,64:100171,65:107833,66:115513,67:123211,68:138550,69:153912,70:169296,71:184707,72:200143,73:213489,74:226864,75:240273}}};
+const PC_INFO={1000000:{room:2500,opd:3000},3000000:{room:4000,opd:5000},6000000:{room:6000,opd:10000},12000000:{room:8000,opd:18000}};
+
+// HERITAGE PLUS 99/12 - Standard Rate
+// เก็บ rate ต่อทุน 1,000 บาท (ชาย/หญิง) แล้วคำนวณ = rate × (ทุน/1000)
+// แต่จากตารางเห็นว่าเป็นเบี้ยจริงต่อทุน 20M ดังนั้นเก็บ 20M เป็น base
+// ทุนอื่น = rate(อายุ) × (ทุนที่เลือก/1000)
+// rate = เบี้ย20M / 20000
+const HP_RATE = {
+  m:{0:18.44,1:18.60,2:18.91,3:19.22,4:19.54,5:19.88,6:20.24,7:20.60,8:21.00,9:21.41,10:21.82,11:22.29,12:22.75,13:23.23,14:23.69,15:24.18,16:24.67,17:25.17,18:25.67,19:26.18,20:26.72,21:27.25,22:27.81,23:28.38,24:28.98,25:29.59,26:30.25,27:30.86,28:31.54,29:32.23,30:32.92,31:33.72,32:34.51,33:35.34,34:36.20,35:37.10,36:38.05,37:39.03,38:40.04,39:41.11,40:42.14,41:43.21,42:44.32,43:45.48,44:46.67,45:47.91,46:49.20,47:50.53,48:51.92,49:53.35,50:54.83,51:56.34,52:57.93,53:59.65,54:61.28,55:62.86,56:64.52,57:66.25,58:68.07,59:69.97,60:71.97,61:74.08,62:76.32,63:78.68,64:79.42,65:81.50,66:83.71,67:87.02,68:89.98,69:92.73,70:95.81,71:99.05,72:103.21,73:106.93,74:112.00,75:116.29},
+  f:{0:14.33,1:14.52,2:14.83,3:15.12,4:15.43,5:15.76,6:16.10,7:16.44,8:16.89,9:17.28,10:17.68,11:18.10,12:18.53,13:18.96,14:19.38,15:19.58,16:20.02,17:20.45,18:20.90,19:21.36,20:21.83,21:22.56,22:23.10,23:23.67,24:24.26,25:24.88,26:25.52,27:26.18,28:26.77,29:27.33,30:27.91,31:28.57,32:29.23,33:29.90,34:30.59,35:31.41,36:32.21,37:33.04,38:33.92,39:34.83,40:35.78,41:36.77,42:37.80,43:38.88,44:40.01,45:41.18,46:42.41,47:43.63,48:44.86,49:46.13,50:47.41,51:48.77,52:50.32,53:51.95,54:53.41,55:55.05,56:56.77,57:58.55,58:60.43,59:62.15,60:63.93,61:65.80,62:67.81,63:69.86,64:72.08,65:74.45,66:77.00,67:79.72,68:82.54,69:85.91,70:89.51,71:92.32,72:96.53,73:101.03,74:105.83,75:110.98}
+};
+
+// ════════════════════════════════════
+// STATE
+// ════════════════════════════════════
+let mode='pc', gender='m', ciAmt=3000000, lgAmt=2000000, pcAmt=3000000, hpAmt=20000000;
+
+function fmt(n){return n?Math.round(n).toLocaleString('th-TH'):'0';}
+
+function sw(m){
+  mode=m;
+  const tabs={ci:'tabCI',lg:'tabLG',pc:'tabPC',hp:'tabHP'};
+  Object.values(tabs).forEach(id=>document.getElementById(id).className='tb');
+  const cls={ci:'t-ci',lg:'t-lg',pc:'t-pc',hp:'t-hp'};
+  document.getElementById(tabs[m]).className='tb '+cls[m];
+
+  document.getElementById('heroEl').className='hero'+(m==='ci'?'':' m-'+m);
+
+  const tt={ci:'โรคร้ายแรง<br><em>CI Re-Claim Re-Care</em>',lg:'ประกันมรดก<br><em>Dragon Group · FWD</em>',pc:'ประกันสุขภาพ<br><em>พรีเชียส แคร์ โพรเทคชั่น</em>',hp:'ประกันชีวิต<br><em>Heritage Plus 99/12</em>'};
+  const dd={ci:'เช็คเบี้ย CI โรคร้ายแรง 50 โรค Re-Claim ได้ทุกปี',lg:'วางแผนมรดก ส่งต่อทรัพย์สินให้ทายาท',pc:'สุขภาพเหมาจ่าย วงเงินสูงสุด 12 ล้าน/ปี',hp:'ทุนชีวิตสูง 10-100 ล้าน คุ้มครองถึงอายุ 99'};
+  const ft={ci:'🔍 ค้นหาเบี้ย CI',lg:'🔍 ค้นหาเบี้ยมรดก',pc:'🔍 ค้นหาเบี้ยพรีเชียส แคร์',hp:'🔍 ค้นหาเบี้ย Heritage Plus'};
+  document.getElementById('htitle').innerHTML=tt[m];
+  document.getElementById('hdesc').textContent=dd[m];
+  document.getElementById('ftitle').textContent=ft[m];
+
+  ['secCI','secLG','secPC','secHP'].forEach(id=>document.getElementById(id).style.display='none');
+  const secMap={ci:'secCI',lg:'secLG',pc:'secPC',hp:'secHP'};
+  document.getElementById(secMap[m]).style.display='';
+
+  const sc={ci:'s-ci',lg:'s-lg',pc:'s-pc',hp:'s-hp'};
+  document.getElementById('sbtn').className='sbtn '+sc[m];
+  updateGen(); hide();
+}
+
+function setG(g){gender=g;updateGen();}
+function updateGen(){
+  const ac={ci:'g-ci',lg:'g-lg',pc:'g-pc',hp:'g-hp'}[mode];
+  document.getElementById('btnM').className='gbtn'+(gender==='m'?' '+ac:'');
+  document.getElementById('btnF').className='gbtn'+(gender==='f'?' '+ac:'');
+}
+
+function pick(t,a,el){
+  if(t==='ci')ciAmt=a;else if(t==='lg')lgAmt=a;else if(t==='pc')pcAmt=a;else hpAmt=a;
+  const idMap={ci:'ciA',lg:'lgA',pc:'pcA',hp:'hpA'};
+  const clsMap={ci:'a-ci',lg:'a-lg',pc:'a-pc',hp:'a-hp'};
+  document.querySelectorAll('#'+idMap[t]+' .ab').forEach(b=>b.classList.remove('a-ci','a-lg','a-pc','a-hp'));
+  el.classList.add(clsMap[t]);
+}
+
+function hide(){
+  document.getElementById('rSec').classList.remove('show');
+  document.getElementById('nrEl').style.display='none';
+  document.getElementById('qrEl').style.display='none';
+}
+
+function doSearch(){
+  const age=parseInt(document.getElementById('inAge').value);
+  const errEl=document.getElementById('ageErr');
+  const maxA={ci:70,lg:65,pc:75,hp:75}[mode];
+  const minA={ci:1,lg:20,pc:20,hp:0}[mode];
+  if(isNaN(age)||age<minA||age>maxA){
+    errEl.textContent='กรุณากรอกอายุ '+minA+'-'+maxA+' ปี';
+    errEl.style.display='block';
+    document.getElementById('inAge').classList.add('err');
+    return;
+  }
+  errEl.style.display='none';
+  document.getElementById('inAge').classList.remove('err');
+  document.getElementById('ldEl').style.display='block';
+  document.getElementById('spEl').className='sp sp-'+mode;
+  hide();
+
+  setTimeout(()=>{
+    document.getElementById('ldEl').style.display='none';
+    let p=null;
+    if(mode==='ci'){const d=CI[ciAmt];if(d&&d[age])p=gender==='m'?d[age].m:d[age].f;}
+    else if(mode==='lg'){const d=LEG[lgAmt];if(d)p=gender==='m'?d.m[age]:d.f[age];}
+    else if(mode==='pc'){const d=PC[pcAmt];if(d)p=gender==='m'?d.m[age]:d.f[age];}
+    else{// Heritage Plus: rate × (ทุน/1000)
+      const r=HP_RATE[gender==='m'?'m':'f'][age];
+      if(r!=null) p=r*(hpAmt/1000);
+    }
+    if(!p){document.getElementById('nrEl').style.display='block';return;}
+    render(age,p);
+  },500);
+}
+
+function render(age,prem){
+  const mo=Math.ceil(prem/12);
+  const g=gender==='m'?'ชาย':'หญิง';
+  const hc={ci:'rh-ci',lg:'rh-lg',pc:'rh-pc',hp:'rh-hp'}[mode];
+  document.getElementById('rHdr').className='rhdr '+hc;
+  document.getElementById('rPrem').className='pval pv-'+mode;
+  document.getElementById('rPrem').innerHTML=fmt(prem)+'<span>บาท/ปี</span>';
+  document.getElementById('rMo').textContent='≈ '+fmt(mo)+' บาท/เดือน';
+
+  if(mode==='ci'){
+    const cL=ciAmt>=1000000?(ciAmt/1000000)+' ล้าน':fmt(ciAmt);
+    document.getElementById('rPlan').textContent='CI Re-Claim Re-Care Plus';
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='ทุน CI Re-Claim';
+    document.getElementById('rSum').textContent=cL+' บาท';
+    document.getElementById('rL1L').textContent='ทุนประกันชีวิต';document.getElementById('rL1').textContent='200,000 ฿';
+    document.getElementById('rL2L').textContent='เคลมสูงสุด';document.getElementById('rL2').className='dv dv-ci';document.getElementById('rL2').textContent=CI_MAX[ciAmt]||'-';
+    document.getElementById('rL3').textContent='99 ปี';document.getElementById('rL4').textContent='1-70 ปี';
+    document.getElementById('covL').innerHTML=`<div class="cov"><div class="ck">✓</div><div>โรคร้ายแรง 50 โรค Re-Claim ทุกปี</div></div><div class="cov"><div class="ck">✓</div><div>Re-Care ดูแลหลังป่วยโรคร้าย</div></div><div class="cov"><div class="ck">✓</div><div>ทุนชีวิต 200,000 บาท ถึงอายุ 99</div></div>`;
+    document.getElementById('ctaL').className='cbtn cb-ci';document.getElementById('ctaA').className='cbtn cb-out-ci';
+  } else if(mode==='lg'){
+    const lL=(lgAmt/1000000)+' ล้านบาท';
+    const ci={1000000:'800K',2000000:'1.8M',3000000:'2.8M',5000000:'4.8M'}[lgAmt]||'-';
+    document.getElementById('rPlan').textContent='ประกันมรดก '+lL;
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='ทุนชีวิต';document.getElementById('rSum').textContent=lL;
+    document.getElementById('rL1L').textContent='ทุนชีวิต';document.getElementById('rL1').textContent=fmt(lgAmt)+' ฿';
+    document.getElementById('rL2L').textContent='CI โรคร้าย';document.getElementById('rL2').className='dv dv-lg';document.getElementById('rL2').textContent=ci;
+    document.getElementById('rL3').textContent='98 ปี';document.getElementById('rL4').textContent='20-65 ปี';
+    document.getElementById('covL').innerHTML=`<div class="cov"><div class="ck">✓</div><div>ทุนชีวิต ${lL} ส่งต่อทายาท</div></div><div class="cov"><div class="ck">✓</div><div>CI ${ci} ครอบคลุม 50 โรค</div></div><div class="cov"><div class="ck">✓</div><div>เบี้ยคงที่ วางแผนการเงินระยะยาว</div></div>`;
+    document.getElementById('ctaL').className='cbtn cb-lg';document.getElementById('ctaA').className='cbtn cb-out-lg';
+  } else if(mode==='pc'){
+    const pL=(pcAmt/1000000)+' ล้านบาท';const inf=PC_INFO[pcAmt];
+    document.getElementById('rPlan').textContent='FWD พรีเชียส แคร์ '+pL;
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='วงเงิน/ปี';document.getElementById('rSum').textContent=pL;
+    document.getElementById('rL1L').textContent='ค่าห้องต่อคืน';document.getElementById('rL1').textContent=fmt(inf.room)+' ฿';
+    document.getElementById('rL2L').textContent='ผู้ป่วยนอก/ครั้ง';document.getElementById('rL2').className='dv dv-pc';document.getElementById('rL2').textContent=fmt(inf.opd)+' ฿';
+    document.getElementById('rL3').textContent='99 ปี';document.getElementById('rL4').textContent='20-75 ปี';
+    document.getElementById('covL').innerHTML=`<div class="cov"><div class="ck">✓</div><div>เหมาจ่าย ${pL}/ปี ไม่มีส่วนแรก</div></div><div class="cov"><div class="ck">✓</div><div>OPD ${fmt(inf.opd)} บาท/ครั้ง</div></div><div class="cov"><div class="ck">✓</div><div>ทุนชีวิต 60,000 บาท คุ้มครองถึงอายุ 99</div></div>`;
+    document.getElementById('ctaL').className='cbtn cb-pc';document.getElementById('ctaA').className='cbtn cb-out-pc';
+  } else {
+    // Heritage Plus
+    const hL=(hpAmt/1000000)+' ล้านบาท';
+    document.getElementById('rPlan').textContent='FWD Heritage Plus 99/12';
+    document.getElementById('rFor').textContent=g+' อายุ '+age+' ปี';
+    document.getElementById('rSumLbl').textContent='ทุนประกันชีวิต';document.getElementById('rSum').textContent=hL;
+    document.getElementById('rL1L').textContent='ทุนชีวิต';document.getElementById('rL1').textContent=hL;
+    document.getElementById('rL2L').textContent='แบบ';document.getElementById('rL2').className='dv dv-hp';document.getElementById('rL2').textContent='99/12';
+    document.getElementById('rL3').textContent='99 ปี';document.getElementById('rL4').textContent='แรกเกิด-75 ปี';
+    document.getElementById('covL').innerHTML=`<div class="cov"><div class="ck">✓</div><div>คุ้มครองชีวิต ${hL} ถึงอายุ 99 ปี</div></div><div class="cov"><div class="ck">✓</div><div>จ่ายเบี้ย 12 ปี คุ้มครองตลอดชีพ</div></div><div class="cov"><div class="ck">✓</div><div>วางแผนมรดก Legacy สำหรับทายาท</div></div><div class="cov"><div class="ck">✓</div><div>ทุนสูงสุด 100 ล้านบาท</div></div>`;
+    document.getElementById('ctaL').className='cbtn cb-hp';document.getElementById('ctaA').className='cbtn cb-out-hp';
+  }
+
+  document.getElementById('rSec').classList.add('show');
+  setTimeout(()=>{document.getElementById('rSec').scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+
+function shareToLine(){
+  const plan=document.getElementById('rPlan').textContent;
+  const premEl=document.getElementById('rPrem');
+  const prem=premEl.childNodes[0].textContent.trim()+' บาท/ปี';
+  const sum=document.getElementById('rSum').textContent;
+  const rFor=document.getElementById('rFor').textContent;
+  const mo=document.getElementById('rMo').textContent;
+  const msg=
+    '🛡️ ผลเบี้ยประกัน FWD\n'
+    +'━━━━━━━━━━━━━━\n'
+    +'📋 แผน: '+plan+'\n'
+    +'👤 '+rFor+'\n'
+    +'💰 ทุน: '+sum+'\n'
+    +'📊 เบี้ยรายปี: '+prem+'\n'
+    +'📆 '+mo+'\n'
+    +'━━━━━━━━━━━━━━\n'
+    +'💬 สอบถามเพิ่มเติม ติดต่อเอเจนต์\n'
+    +'📱 Line: https://lin.ee/Wb0k43i\n'
+    +'🔖 Agent Code: 162165';
+  const url='https://line.me/R/msg/text/?'+encodeURIComponent(msg);
+  window.open(url,'_blank');
+}
+
+function showQR(){
+  document.getElementById('qrEl').style.display='block';
+  setTimeout(()=>{document.getElementById('qrEl').scrollIntoView({behavior:'smooth',block:'center'});},100);
+}
+
+function openAppt(){
+  document.getElementById('mbd').style.display='block';
+  document.getElementById('ssEl').style.display='none';
+  const age=document.getElementById('inAge').value;
+  if(age){
+    const nm={ci:'CI '+(ciAmt>=1000000?ciAmt/1000000+'M':ciAmt),lg:'มรดก '+(lgAmt/1000000)+'M',pc:'พรีเชียส '+(pcAmt/1000000)+'M',hp:'Heritage '+(hpAmt/1000000)+'M'}[mode];
+    document.getElementById('aNt').value='สนใจแผน '+nm+' อายุ '+age+' ปี '+(gender==='m'?'ชาย':'หญิง');
+  }
+  document.getElementById('apptM').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeAppt(){document.getElementById('apptM').classList.remove('show');document.body.style.overflow='';}
+function closeOut(e){if(e.target===document.getElementById('apptM'))closeAppt();}
+async function subAppt(){
+  const n=document.getElementById('aNm').value.trim();
+  const p=document.getElementById('aPh').value.trim();
+  if(!n||!p){alert('กรุณากรอกชื่อและเบอร์โทรศัพท์ครับ');return;}
+  const btn=document.querySelector('.msub');
+  btn.textContent='⏳ กำลังส่ง...';btn.disabled=true;
+  const payload={
+    name:n,
+    phone:p,
+    line:document.getElementById('aLn').value.trim(),
+    date:document.getElementById('aDt').value,
+    time:document.getElementById('aTm').value,
+    plan:document.getElementById('aNt').value.split('\n')[0]||mode.toUpperCase(),
+    note:document.getElementById('aNt').value.trim()
+  };
+  try{
+    const params=new URLSearchParams({
+      name:payload.name,
+      phone:payload.phone,
+      line:payload.line,
+      date:payload.date,
+      time:payload.time,
+      plan:payload.plan,
+      note:payload.note
+    });
+    await fetch('https://script.google.com/macros/s/AKfycbxYlR_58oncGvg778hRw5lFYHOmxEuThggLQrdEwqSaK_4Qk2jxCOm4hvyJjmNUl8Pj/exec?'+params.toString(),{method:'GET',mode:'no-cors'});
+  }catch(err){console.warn('Sheet error',err);}
+  btn.textContent='✅ ส่งคำขอนัดหมาย';btn.disabled=false;
+  document.getElementById('mbd').style.display='none';
+  document.getElementById('ssEl').style.display='block';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  sw('pc');
+  document.getElementById('inAge').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+  document.getElementById('aDt').min=new Date().toISOString().split('T')[0];
+});
+</script>
+</body>
+</html>
