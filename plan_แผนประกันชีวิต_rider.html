@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FWD Insurance Plan Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6200;
+    --orange-light: #FF8C42;
+    --orange-pale: #FFF0E6;
+    --dark: #1A1A1A;
+    --gray: #6B6B6B;
+    --light: #F9F9F9;
+    --white: #FFFFFF;
+    --green: #2ECC71;
+    --blue: #3498DB;
+    --purple: #9B59B6;
+    --red: #E74C3C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F4F4F0;
+    font-family: 'Sarabun', sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--orange);
+    padding: 28px 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .fwd-logo {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: white;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    opacity: 0.95;
+  }
+
+  .fwd-logo span {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    display: block;
+    opacity: 0.8;
+    margin-top: -2px;
+  }
+
+  .plan-title {
+    font-family: 'Prompt', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .plan-name {
+    font-family: 'Prompt', sans-serif;
+    font-size: 22px;
+    color: white;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .customer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: white;
+    backdrop-filter: blur(4px);
+  }
+
+  /* TOTAL PREMIUM BANNER */
+  .premium-banner {
+    background: var(--dark);
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .premium-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+  }
+
+  .premium-amount {
+    font-family: 'Prompt', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .premium-amount span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .per-month {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 3px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 22px 28px;
+    border-bottom: 1px solid #F0F0F0;
+    animation: fadeIn 0.5s ease-out both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.2s; }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.4s; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  /* COVERAGE ITEMS */
+  .coverage-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #F7F7F7;
+  }
+
+  .coverage-item:last-child { border-bottom: none; }
+
+  .cov-icon {
+    width: 42px; height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .cov-main { flex: 1; }
+
+  .cov-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .cov-desc {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .cov-right { text-align: right; }
+
+  .cov-sum {
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1;
+  }
+
+  .cov-premium {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 3px;
+  }
+
+  .cov-free {
+    background: #E8F8F0;
+    color: #27AE60;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  /* HIGHLIGHTS */
+  .highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .highlight-card {
+    border-radius: 16px;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-card .hl-icon { font-size: 22px; margin-bottom: 6px; }
+
+  .highlight-card .hl-value {
+    font-family: 'Prompt', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .highlight-card .hl-label {
+    font-size: 11px;
+    margin-top: 3px;
+    opacity: 0.75;
+  }
+
+  .hl-orange { background: var(--orange-pale); color: var(--orange); }
+  .hl-dark   { background: var(--dark); color: white; }
+  .hl-green  { background: #E8F8F0; color: #1E8449; }
+  .hl-blue   { background: #EBF5FB; color: #1A5276; }
+
+  /* PROS */
+  .pro-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .pro-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .pro-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pro-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--dark);
+  }
+
+  .pro-text strong { color: var(--orange); }
+
+  /* NOTE */
+  .note-box {
+    background: #FFFBF5;
+    border-left: 3px solid var(--orange);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* VERDICT */
+  .verdict {
+    background: linear-gradient(135deg, var(--orange) 0%, #FF4500 100%);
+    padding: 24px 28px;
+    text-align: center;
+    color: white;
+  }
+
+  .verdict-stars {
+    font-size: 22px;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .verdict-title {
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .verdict-text {
+    font-size: 13px;
+    opacity: 0.9;
+    line-height: 1.6;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .agent-badge {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.9);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="fwd-logo">FWD <span>insurance</span></div>
+    <div class="plan-title">สรุปแผนประกันชีวิต</div>
+    <div class="plan-name">ตลอดชีพ 90/20<br>+ สัญญาเพิ่มเติม</div>
+    <div class="customer-badge">
+      👤 VVIP ชาย &nbsp;|&nbsp; อายุ 45 ปี
+    </div>
+  </div>
+
+  <!-- PREMIUM BANNER -->
+  <div class="premium-banner">
+    <div>
+      <div class="premium-label">เบี้ยประกันรวมทั้งสิ้น</div>
+      <div class="premium-amount">16,030 <span>บาท/ปี</span></div>
+      <div class="per-month">≈ 1,336 บาท/เดือน</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px">จ่ายเบี้ย</div>
+      <div style="font-family:'Prompt',sans-serif;font-size:22px;font-weight:800;color:white;line-height:1">20 ปี</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px">คุ้มครองถึงอายุ 90</div>
+    </div>
+  </div>
+
+  <!-- COVERAGE DETAIL -->
+  <div class="section">
+    <div class="section-title">📋 รายละเอียดความคุ้มครอง</div>
+
+    <div class="coverage-item">
+      <div class="cov-icon" style="background:#FFF0E6">🛡️</div>
+      <div class="cov-main">
+        <div class="cov-name">กรมธรรม์ตลอดชีพ 90/20</div>
+        <div class="cov-desc">แบบหลัก · คุ้มครองชีวิต</div>
+      </div>
+      <div class="cov-right">
+        <div class="cov-sum">200,000</div>
+        <div class="cov-premium">6,940 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="coverage-item">
+      <div class="cov-icon" style="background:#EBF5FB">🏥</div>
+      <div class="cov-main">
+        <div class="cov-name">ค่ารักษาพยาบาลรายวัน</div>
+        <div class="cov-desc">สัญญา HSB · ชดเชยนอน รพ.</div>
+      </div>
+      <div class="cov-right">
+        <div class="cov-sum">1,000<span style="font-size:11px;font-weight:400;color:#888">/วัน</span></div>
+        <div class="cov-premium">1,600 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="coverage-item">
+      <div class="cov-icon" style="background:#FDEDEC">💊</div>
+      <div class="cov-main">
+        <div class="cov-name">โรคร้ายแรง 50 โรค</div>
+        <div class="cov-desc">สัญญา CI50 · มะเร็ง หัวใจ สมอง ฯลฯ</div>
+      </div>
+      <div class="cov-right">
+        <div class="cov-sum" style="color:var(--orange)">1,000,000</div>
+        <div class="cov-premium">7,490 บาท/ปี</div>
+      </div>
+    </div>
+
+    <div class="coverage-item">
+      <div class="cov-icon" style="background:#E8F8F0">✨</div>
+      <div class="cov-main">
+        <div class="cov-name">ยกเว้นเบี้ยประกัน</div>
+        <div class="cov-desc">สัญญา PWB · กรณีทุพพลภาพ</div>
+      </div>
+      <div class="cov-right">
+        <div class="cov-free">ฟรี!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY HIGHLIGHTS -->
+  <div class="section">
+    <div class="section-title">⚡ จุดเด่นสำคัญ</div>
+    <div class="highlights">
+      <div class="highlight-card hl-orange">
+        <div class="hl-icon">💰</div>
+        <div class="hl-value">1 ล้าน</div>
+        <div class="hl-label">ทุนโรคร้ายแรง</div>
+      </div>
+      <div class="highlight-card hl-dark">
+        <div class="hl-icon">📅</div>
+        <div class="hl-value">ถึงอายุ 90</div>
+        <div class="hl-label">ระยะเวลาคุ้มครอง</div>
+      </div>
+      <div class="highlight-card hl-green">
+        <div class="hl-icon">🏦</div>
+        <div class="hl-value">200,000</div>
+        <div class="hl-label">เงินคืนให้ทายาท</div>
+      </div>
+      <div class="highlight-card hl-blue">
+        <div class="hl-icon">🛑</div>
+        <div class="hl-value">ฟรี!</div>
+        <div class="hl-label">PWB ยกเว้นเบี้ย</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY GOOD -->
+  <div class="section">
+    <div class="section-title">✅ ทำไมแผนนี้ถึงดี</div>
+    <div class="pro-list">
+      <div class="pro-item">
+        <div class="pro-dot">1</div>
+        <div class="pro-text">ทุน CI <strong>1 ล้านบาท</strong> ในราคาแค่ ~625 บาท/เดือน ถือว่าคุ้มมากสำหรับอายุ 45</div>
+      </div>
+      <div class="pro-item">
+        <div class="pro-dot">2</div>
+        <div class="pro-text"><strong>จ่ายแค่ 20 ปี คุ้มครองยาวถึงอายุ 90</strong> ไม่ต้องจ่ายเบี้ยตลอดชีวิต</div>
+      </div>
+      <div class="pro-item">
+        <div class="pro-dot">3</div>
+        <div class="pro-text">มี <strong>PWB ฟรี</strong> ถ้าเกิดทุพพลภาพ ไม่ต้องจ่ายเบี้ย แต่ได้รับความคุ้มครองครบ</div>
+      </div>
+      <div class="pro-item">
+        <div class="pro-dot">4</div>
+        <div class="pro-text">รวม 4 ความคุ้มครองในแผนเดียว ครอบคลุมทั้ง <strong>ชีวิต + โรคร้าย + รักษาพยาบาล</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="section" style="border-bottom:none">
+    <div class="section-title">⚠️ ควรพิจารณาเพิ่ม</div>
+    <div class="note-box">
+      แผนนี้ยังไม่มี <strong>ประกันสุขภาพแบบเหมาจ่าย (OPD/IPD)</strong> หากยังไม่มีประกันสุขภาพหลัก ควรพิจารณาเพิ่มเติมเพื่อให้ความคุ้มครองสมบูรณ์แบบ
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="verdict-stars">★★★★★</div>
+    <div class="verdict-title">แผนนี้คุ้มค่ามาก!</div>
+    <div class="verdict-text">เหมาะสำหรับวัย 45 ที่ต้องการป้องกันความเสี่ยงทางการเงินจากโรคร้ายแรง ในราคาที่ยังสมเหตุสมผล ยิ่งรอนานราคาจะแพงขึ้น</div>
+    <div class="agent-badge">
+      🧑‍💼 Agent Code: 162165
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
