@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winner Prestige – FWD Insurance</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700;800&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#FF6200;
+  --orange-light:#FF8C42;
+  --orange-dark:#CC4E00;
+  --black:#0D0D0D;
+  --white:#FFFFFF;
+  --gray:#F5F4F0;
+  --gray-mid:#888;
+  --gold:#C9A84C;
+}
+body{font-family:'Sarabun',sans-serif;background:#fff;color:var(--black);overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Prompt',sans-serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid rgba(0,0,0,0.08);padding:0 5%}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-badge{background:var(--orange);color:#fff;font-family:'Prompt',sans-serif;font-weight:800;font-size:13px;padding:4px 10px;border-radius:4px;letter-spacing:1px}
+.logo-text{font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;color:var(--black)}
+.logo-sub{font-size:11px;color:var(--gray-mid);display:block;margin-top:-2px}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;align-items:center;padding-top:64px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 80% 50%, #FF620020 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 10% 80%, #FF620015 0%, transparent 50%)}
+.hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,98,0,0.04) 0px,rgba(255,98,0,0.04) 1px,transparent 1px,transparent 80px);pointer-events:none}
+.hero-content{position:relative;z-index:2;padding:80px 5%;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,98,0,0.15);border:1px solid rgba(255,98,0,0.4);color:var(--orange-light);font-size:13px;font-weight:600;padding:6px 14px;border-radius:50px;margin-bottom:24px;font-family:'Prompt',sans-serif}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange-light);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-size:clamp(32px,4vw,56px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px}
+.hero h1 span{color:var(--orange)}
+.hero-sub{color:rgba(255,255,255,0.6);font-size:17px;line-height:1.8;margin-bottom:36px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--orange);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3);padding:14px 28px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 20px;transition:.2s}
+.stat-card:hover{border-color:rgba(255,98,0,0.4);background:rgba(255,98,0,0.06)}
+.stat-num{font-family:'Prompt',sans-serif;font-weight:800;font-size:36px;color:var(--orange);line-height:1}
+.stat-label{color:rgba(255,255,255,0.55);font-size:13px;margin-top:6px;line-height:1.5}
+
+/* WHY */
+.section{padding:80px 5%}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;background:#FFF0E8;color:var(--orange);font-family:'Prompt',sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;padding:5px 14px;border-radius:50px;margin-bottom:16px;text-transform:uppercase}
+.section h2{font-size:clamp(26px,3vw,40px);font-weight:800;line-height:1.3;margin-bottom:12px}
+.section-desc{color:var(--gray-mid);font-size:16px;line-height:1.8;max-width:580px;margin-bottom:52px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.why-card{background:#fff;border:1.5px solid #EDECEA;border-radius:16px;padding:32px 28px;transition:.25s}
+.why-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 12px 40px rgba(255,98,0,0.1)}
+.why-icon{width:52px;height:52px;background:#FFF0E8;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px}
+.why-card h3{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--black)}
+.why-card p{color:var(--gray-mid);font-size:14px;line-height:1.8}
+
+/* PATH */
+.section-dark{background:var(--black);padding:80px 5%}
+.section-dark .section-tag{background:rgba(255,98,0,0.15);color:var(--orange-light)}
+.section-dark h2{color:#fff}
+.section-dark .section-desc{color:rgba(255,255,255,0.5)}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:0}
+.path-card{border-radius:20px;padding:40px 36px;position:relative;overflow:hidden}
+.path-new{background:linear-gradient(135deg,#FF6200,#FF9D60);color:#fff}
+.path-switch{background:#fff;border:2px solid #EDECEA;color:var(--black)}
+.path-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:20px}
+.path-new .path-badge{background:rgba(255,255,255,0.25);color:#fff}
+.path-switch .path-badge{background:var(--orange);color:#fff}
+.path-card h3{font-size:24px;font-weight:800;margin-bottom:12px;line-height:1.3}
+.path-card p{font-size:14px;line-height:1.8;opacity:0.8;margin-bottom:24px}
+.path-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.path-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.6}
+.path-list li::before{content:'✓';font-weight:800;flex-shrink:0;margin-top:1px}
+.path-new .path-list li::before{color:rgba(255,255,255,0.9)}
+.path-switch .path-list li::before{color:var(--orange)}
+
+/* BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.benefit-card{text-align:center;padding:32px 16px}
+.benefit-icon-wrap{width:64px;height:64px;background:linear-gradient(135deg,#FF6200,#FF9D60);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px}
+.benefit-card h4{font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px}
+.benefit-card p{color:var(--gray-mid);font-size:13px;line-height:1.7}
+
+/* TESTIMONIALS */
+.testimonials{background:#FFF8F5;padding:80px 5%}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
+.testi-card{background:#fff;border-radius:16px;padding:28px 24px;border:1px solid #EDECEA}
+.testi-quote{font-size:32px;color:var(--orange);font-family:serif;line-height:1;margin-bottom:14px}
+.testi-text{font-size:14px;line-height:1.9;color:#444;margin-bottom:20px;font-style:italic}
+.testi-person{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;font-family:'Prompt',sans-serif}
+.testi-name{font-weight:700;font-size:14px}
+.testi-role{color:var(--gray-mid);font-size:12px}
+
+/* STEPS */
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps-row::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-light));z-index:0}
+.step{text-align:center;position:relative;z-index:1;padding:0 12px}
+.step-num{width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;font-family:'Prompt',sans-serif;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative}
+.step-num::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(255,98,0,0.3)}
+.step h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--gray-mid);font-size:13px;line-height:1.7}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,#FF6200 0%,#CC4E00 100%);padding:80px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 40%)}
+.cta-section h2{color:#fff;font-size:clamp(26px,3.5vw,44px);font-weight:800;margin-bottom:16px;position:relative}
+.cta-section p{color:rgba(255,255,255,0.8);font-size:17px;margin-bottom:40px;position:relative}
+.cta-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.cta-input{padding:14px 20px;border-radius:8px;border:none;font-family:'Sarabun',sans-serif;font-size:15px;width:260px;outline:none}
+.cta-submit{background:var(--black);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-family:'Prompt',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;white-space:nowrap}
+.cta-submit:hover{background:#222}
+.cta-line{color:rgba(255,255,255,0.6);font-size:12px;margin-top:16px;position:relative}
+
+/* FOOTER */
+footer{background:var(--black);padding:40px 5%;text-align:center}
+footer p{color:rgba(255,255,255,0.3);font-size:13px;line-height:2}
+.footer-brand{color:var(--orange);font-family:'Prompt',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-content{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr}
+  .paths{grid-template-columns:1fr}
+  .benefits-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .steps-row{grid-template-columns:1fr 1fr;gap:24px}
+  .steps-row::before{display:none}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-text-wrap{animation:fadeUp .8s ease both}
+.hero-stats{animation:fadeUp .8s .3s ease both}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-badge">FWD</div>
+      <div>
+        <span class="logo-text">Winner Prestige Team</span>
+        <span class="logo-sub">FWD Insurance | Agent Code 162165</span>
+      </div>
+    </div>
+    <a href="#join" class="btn-primary" style="font-size:13px;padding:10px 22px;text-decoration:none;border-radius:6px">สมัครเลย →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-text-wrap">
+      <div class="hero-tag">รับสมัครตัวแทนประกัน FWD</div>
+      <h1>เติบโตไปด้วยกัน<br>กับทีม <span>Winner<br>Prestige</span></h1>
+      <p class="hero-sub">ไม่ว่าคุณจะเป็นมือใหม่ที่อยากเริ่มต้นอาชีพ<br>หรือตัวแทนมืออาชีพที่มองหาทีมที่ใช่<br>เราพร้อมพาคุณไปถึงเป้าหมาย</p>
+      <div class="hero-ctas">
+        <a href="#join" class="btn-primary">สมัครเป็นทีม →</a>
+        <a href="#why" class="btn-secondary">ดูรายละเอียด</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">10x</div>
+        <div class="stat-label">รายได้มากกว่า<br>งานประจำเฉลี่ย</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">FWD</div>
+        <div class="stat-label">บริษัทประกันชั้นนำ<br>ระดับเอเชีย</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">ระบบ Support<br>พร้อมช่วยเหลือ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">ไม่มีเพดาน<br>รายได้</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FWD -->
+<section class="section" id="why">
+  <div class="section-inner">
+    <div class="section-tag">ทำไมต้อง FWD</div>
+    <h2>บริษัทที่คุณไว้ใจได้<br>ทีมที่พาคุณเติบโต</h2>
+    <p class="section-desc">FWD Insurance คือบริษัทประกันชีวิตชั้นนำระดับเอเชีย ที่มุ่งเปลี่ยนทัศนคติของคนต่ออุตสาหกรรมประกัน</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h3>รายได้ไม่มีเพดาน</h3>
+        <p>ค่าคอมมิชชันสูง + โบนัส + ทริปต่างประเทศ รายได้ขึ้นอยู่กับผลงานของคุณเอง ไม่ใช่เงินเดือนตาย</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📱</div>
+        <h3>ระบบดิจิทัลล้ำสมัย</h3>
+        <p>แอป FWD ครบวงจร ขายออนไลน์ได้ทุกที่ ทุกเวลา ลูกค้าสะดวก คุณก็สบาย ไม่ต้องพึ่งเอกสารกระดาษ</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h3>แบรนด์ที่ลูกค้าเชื่อถือ</h3>
+        <p>FWD มีฐานลูกค้าทั่วเอเชีย ชื่อแบรนด์ช่วยเปิดประตู ทำให้การนำเสนอง่ายขึ้นมาก</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📚</div>
+        <h3>Training ฟรีทุกขั้นตอน</h3>
+        <p>อบรมหลักสูตรสมบูรณ์ ตั้งแต่เริ่มต้นจนถึงระดับ Leader ทีมพี่เลี้ยงพร้อมสอนตลอด</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⏰</div>
+        <h3>เวลาเป็นของคุณ</h3>
+        <p>บริหารเวลาเอง ไม่มีเช็คอิน ไม่ต้องนั่งออฟฟิศ เหมาะสำหรับคนที่รักอิสระในชีวิตการทำงาน</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">👑</div>
+        <h3>ก้าวสู่ระดับ Leader</h3>
+        <p>มีเส้นทางเติบโตชัดเจน สร้างทีมของตัวเอง รับ Override จากทีม สร้าง Passive Income ระยะยาว</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATH -->
+<section class="section-dark" id="path">
+  <div class="section-inner">
+    <div class="section-tag">เส้นทางของคุณ</div>
+    <h2 style="color:#fff;font-size:clamp(26px,3vw,40px);font-weight:800;line-height:1.3;margin-bottom:12px">เราเปิดรับทุกคน<br>ทุกประสบการณ์</h2>
+    <p class="section-desc">ไม่ว่าคุณจะมาจากไหน เรามีเส้นทางที่ออกแบบมาเพื่อคุณโดยเฉพาะ</p>
+    <div class="paths">
+      <div class="path-card path-new">
+        <div class="path-badge">ตัวแทนหน้าใหม่</div>
+        <h3>เพิ่งเริ่มต้น? ไม่มีประสบการณ์? ไม่เป็นไร</h3>
+        <p>เราสอนตั้งแต่ศูนย์ มีระบบ Mentoring ชัดเจน พาคุณสู่การมีรายได้จริงในเวลาอันสั้น</p>
+        <ul class="path-list">
+          <li>สอบใบอนุญาตตัวแทน (นขช.) พร้อมทีมช่วยติวสอบ</li>
+          <li>อบรมหลักสูตรการขาย ตั้งแต่พื้นฐานจนถึงขั้นสูง</li>
+          <li>มีพี่เลี้ยงดูแลในช่วง 3 เดือนแรก</li>
+          <li>Script การพูด + เครื่องมือการตลาดพร้อมใช้</li>
+        </ul>
+      </div>
+      <div class="path-card path-switch">
+        <div class="path-badge">ย้ายค่าย / โอนย้าย</div>
+        <h3>ตัวแทนมืออาชีพ พร้อมอัพเกรด</h3>
+        <p>มีประสบการณ์อยู่แล้ว แต่รู้สึกว่าบริษัทเดิมไม่ตอบโจทย์? มาร่วมกับเราได้เลย</p>
+        <ul class="path-list">
+          <li style="color:var(--black)">รักษา Portfolio ลูกค้าเดิมได้ทั้งหมด</li>
+          <li style="color:var(--black)">รับค่าคอมมิชชันสูงกว่าตามประสบการณ์</li>
+          <li style="color:var(--black)">เข้าทีม Leader ได้ทันที หากมีคุณสมบัติ</li>
+          <li style="color:var(--black)">มีทีม Support ช่วย Transition อย่างราบรื่น</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <div class="section-inner">
+    <div class="section-tag">สิ่งที่ได้รับ</div>
+    <h2>เข้าทีม Winner Prestige<br>ได้อะไรบ้าง?</h2>
+    <p class="section-desc">มากกว่าแค่งาน — นี่คืออาชีพที่สร้างอนาคตให้คุณได้จริง</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">🎓</div>
+        <h4>อบรมฟรีตลอด</h4>
+        <p>หลักสูตร Online & Offline ทั้งการขาย การตลาด และจิตวิทยาการสื่อสาร</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">📊</div>
+        <h4>ระบบ CRM ครบครัน</h4>
+        <p>ติดตามลูกค้า วิเคราะห์ยอดขาย และบริหาร Portfolio ผ่านแอปเดียว</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">✈️</div>
+        <h4>ทริปต่างประเทศ</h4>
+        <p>Convention Trip รางวัลสำหรับตัวแทนที่มียอดขายถึงเป้า</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">👥</div>
+        <h4>Community แข็งแกร่ง</h4>
+        <p>เครือข่ายตัวแทน FWD ทั่วประเทศ แบ่งปัน Leads และประสบการณ์กัน</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-tag">เสียงจากทีมงาน</div>
+    <h2 style="font-size:clamp(26px,3vw,40px);font-weight:800;line-height:1.3;margin-bottom:12px">คนที่เริ่มต้นก่อนคุณ<br>บอกอะไรบ้าง?</h2>
+    <p class="section-desc" style="margin-bottom:40px">ฟังจากปากของทีม Winner Prestige โดยตรง</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">ก่อนหน้านี้เป็นพนักงานออฟฟิศ เงินเดือน 18,000 บาท หลังจากมาเป็นตัวแทน FWD กับทีม Winner Prestige ได้ไม่ถึงปี รายได้ขึ้นไปแตะ 80,000 บาทต่อเดือน ชีวิตเปลี่ยนไปมากจริงๆ</p>
+        <div class="testi-person">
+          <div class="testi-avatar">ส</div>
+          <div>
+            <div class="testi-name">คุณสุภาภรณ์ ท.</div>
+            <div class="testi-role">ตัวแทนหน้าใหม่ → Top Agent ภายใน 8 เดือน</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">ย้ายมาจากบริษัทเดิมที่ทำอยู่ 5 ปี เพราะรู้สึกว่าไม่มีระบบ Support ที่ดี พอมาอยู่กับทีมนี้ มี Mentor ช่วย มีเครื่องมือ มีทีม — ยอดขายดีขึ้นตั้งแต่เดือนแรกเลย</p>
+        <div class="testi-person">
+          <div class="testi-avatar">ว</div>
+          <div>
+            <div class="testi-name">คุณวิชัย พ.</div>
+            <div class="testi-role">ย้ายค่าย | ประสบการณ์ 5 ปี</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">ชอบที่ทีมนี้ไม่ทิ้งกัน มีกลุ่ม Line คอยตอบคำถาม มีพี่เลี้ยงช่วย Close Sale มีระบบ Marketing ให้ใช้ ไม่ต้องทำเองทุกอย่าง แต่รายได้เป็นของตัวเอง 100%</p>
+        <div class="testi-person">
+          <div class="testi-avatar">น</div>
+          <div>
+            <div class="testi-name">คุณนภาพร ก.</div>
+            <div class="testi-role">อดีตแม่บ้าน → ตัวแทนระดับ Gold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-tag">ขั้นตอน</div>
+    <h2>เริ่มต้นได้ง่ายกว่าที่คิด</h2>
+    <p class="section-desc" style="margin-bottom:52px">4 ขั้นตอนสู่อาชีพตัวแทน FWD กับทีม Winner Prestige</p>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>กรอกข้อมูล</h4>
+        <p>กรอกฟอร์มสมัคร หรือทัก LINE มาหาเราได้เลย ใช้เวลาไม่ถึง 2 นาที</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>พูดคุยกับทีม</h4>
+        <p>นัดคุยออนไลน์ หรือพบตัวเพื่อแนะนำโอกาสและเส้นทางที่เหมาะกับคุณ</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>สอบใบอนุญาต</h4>
+        <p>ทีมช่วยเตรียมสอบ นขช. มีคลาสติวฟรี ผ่านง่ายกว่าที่คิด</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>เริ่มทำรายได้</h4>
+        <p>เริ่มขายได้ทันที มีทีมช่วย Close Sale และ Support ในทุกขั้นตอน</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="join">
+  <div class="section-inner" style="max-width:700px;margin:0 auto">
+    <h2>พร้อมเปลี่ยนชีวิตแล้วหรือยัง?</h2>
+    <p>ฝากเบอร์ไว้ให้ทีมติดต่อกลับภายใน 24 ชั่วโมง<br>หรือทัก LINE มาหาเราได้โดยตรง</p>
+    <div class="cta-form">
+      <input class="cta-input" type="text" placeholder="ชื่อ - นามสกุล" />
+      <input class="cta-input" type="tel" placeholder="เบอร์โทรศัพท์" />
+      <button class="cta-submit" onclick="alert('ขอบคุณที่สนใจ! ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง')">ส่งข้อมูล →</button>
+    </div>
+    <p class="cta-line">หรือทัก LINE ได้เลยที่ <strong style="color:#fff">@winner_prestige</strong> | ตัวแทนรหัส 162165</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Winner Prestige Team × FWD Insurance</div>
+  <p>Agent Code: 162165 | FWD Life Insurance Co., Ltd.<br>ได้รับใบอนุญาตประกันชีวิตประเภท ป. | คปภ. กำกับดูแล</p>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
