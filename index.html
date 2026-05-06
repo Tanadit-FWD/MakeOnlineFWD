@@ -553,7 +553,7 @@ async function subAppt(){
   if(!n||!p){alert('กรุณากรอกชื่อและเบอร์โทรศัพท์ครับ');return;}
   const btn=document.querySelector('.msub');
   btn.textContent='⏳ กำลังส่ง...';btn.disabled=true;
-  const base='https://script.google.com/macros/s/AKfycbzxPx-2h6lB4q-7TD9hh2LQSWDo2lKRQdjfX5FuoWC2CyZGl57n6KQaJwNVCizbq0Ao/exec';
+  const base='https://script.google.com/macros/s/AKfycbzQqTt068b39X80WnG213ir139Vg2Ls7jO50sbF-LGA0qBdkX6mwOOfKgV-aQjRmAKr/exec';
   const params=new URLSearchParams({
     name:n,
     phone:p,
