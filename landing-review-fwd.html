@@ -312,6 +312,45 @@
       font-size:13px;
     }
 
+.fb-responsive {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.fb-iframe {
+  width: 100%;
+  height: 746px;
+  border: none;
+  overflow: hidden;
+  display: block;
+}
+
+@media (max-width: 540px) {
+  .fb-responsive {
+    max-width: 100%;
+  }
+
+  .fb-iframe {
+    width: 100%;
+    height: 690px;
+  }
+}
+
+@media (max-width: 430px) {
+  .fb-iframe {
+    height: 650px;
+  }
+}
+
+@media (max-width: 390px) {
+  .fb-iframe {
+    height: 620px;
+  }
+}
+
     .fb-section{
       background:linear-gradient(180deg,#fff,#fff7f0);
     }
@@ -726,21 +765,20 @@
           <p>ถ้ามีลิงก์โพสต์ Facebook แบบ Public ให้นำ URL มาใส่แทนตัวอย่างด้านล่างได้เลย</p>
         </div>
 
-  <div class="fb-grid">
-  <div class="fb-card">
-    <div class="fb-embed-wrap">
-      <iframe 
-        src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FFWDFamily%2Fposts%2Fpfbid029t2rFXPnnVcnXYnEsUC8wDhB1Aa4CSSqzifPEjcmDAKkggpYL7C9GQMciDjGBL9Hl&show_text=true&width=500"
-        width="500"
-        height="746"
-        style="border:none;overflow:hidden"
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-      </iframe>
-    </div>
+        <div class="fb-grid">
+          <div class="fb-card">
+  <div class="fb-responsive">
+    <iframe 
+      src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FFWDFamily%2Fposts%2Fpfbid029t2rFXPnnVcnXYnEsUC8wDhB1Aa4CSSqzifPEjcmDAKkggpYL7C9GQMciDjGBL9Hl&show_text=true&width=500"
+      class="fb-iframe"
+      scrolling="no"
+      frameborder="0"
+      allowfullscreen="true"
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+    </iframe>
   </div>
+</div>
+          </div>
 
 
 <div class="fb-card">
