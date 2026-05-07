@@ -984,10 +984,16 @@ LINE: ${lead.line}
       }
 
       // พาเข้า LINE OA พร้อมข้อความที่ลูกค้ากรอก
-      setTimeout(function() {
-        const lineUrl = "https://line.me/R/oaMessage/@349lbaul/?" + encodeURIComponent(message);
-        window.location.href = lineUrl;
-      }, 700);
+      // setTimeout(function() {
+      //  const lineUrl = "https://line.me/R/oaMessage/@349lbaul/?" + encodeURIComponent(message);
+      //  window.location.href = lineUrl;
+      //  }, 700);
+
+    setTimeout(function() {
+     alert("ส่งข้อมูลเรียบร้อยแล้วครับ เดี๋ยวตัวแทนจะติดต่อกลับ");
+      form.reset();
+    document.getElementById("successBox").style.display = "none";
+}, 700);
     });
   </script>
 </body>
