@@ -444,7 +444,15 @@ function selectType(btn, val) {
   document.getElementById('applicantType').value = val;
 }
 
-async function submitForm() {
+function setSubmitLoading(isLoading) {
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = isLoading;
+  btn.textContent = isLoading ? 'กำลังส่งข้อมูล...' : 'ส่งข้อมูลสมัคร →';
+}
+
+async function submitForm(event) {
+  if (event) event.preventDefault();
+
   const name = document.getElementById('fname').value.trim();
   const age = document.getElementById('fage').value.trim();
   const phone = document.getElementById('fphone').value.trim();
@@ -459,27 +467,28 @@ async function submitForm() {
     return;
   }
 
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'กำลังส่งข้อมูล...';
+  setSubmitLoading(true);
 
   const payload = { name, age, phone, email, lineid, job, experience: exp, type, timestamp: new Date().toLocaleString('th-TH') };
 
   try {
-    if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+      throw new Error('Google Apps Script URL is not configured.');
     }
+
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+
     document.getElementById('formBody').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   } catch (e) {
+    console.error('Submit failed:', e);
     alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง หรือทัก LINE โดยตรง');
-    btn.disabled = false;
-    btn.textContent = 'ส่งข้อมูลสมัคร →';
+    setSubmitLoading(false);
   }
 }
 
